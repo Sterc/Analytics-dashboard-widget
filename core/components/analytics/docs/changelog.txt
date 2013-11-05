@@ -1,0 +1,13 @@
+Analytics Dashboard widget 1.0.1
+====================================
+- All data-charts are working again
+- Changed MODX.on('ready' to Ext.ready(
+- Authentication changed to make domain-verification fool-proof
+- Updated the Google's API for listing all the accounts
+- Added loading-screen after Analytics profile is selected
+
+Analytics Dashboard widget 1.0.0
+====================================
+- Vertical tabs
+- Added Internel search
+- Ability to hide tabs
