@@ -6,29 +6,13 @@ Ext.chart.Chart.CHART_URL=GA.assets_url+'swf/charts.swf';
 MODx.panel.GADashboardWidget = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-    cls: 'vertical-tabs-panel'
-        ,xtype: 'modx-vtabs'
+    items: [{
+        xtype: 'modx-vtabs'
         ,renderTo: 'analytics-panel-widget'
         ,id: 'ga-widget-tabs'
         ,activeTab: 0
         ,border:false
-        ,autoWidth: true
-        ,resizable: true
         ,monitorResize:true
-        ,deferredRender: false
-        ,defaults: {
-			bodyCssClass: 'vertical-tabs-body'
-            ,autoScroll: true
-            ,autoHeight: true
-            ,autoWidth: true
-			,layout: 'form'
-		}
-        		,bwrapCfg: { tag: 'div', cls: 'x-tab-panel-bwrap vertical-tabs-bwrap' }
-        ,headerCfg: {
-            tag: 'div'
-            ,cls: 'x-tab-panel-header vertical-tabs-header'
-            ,id: 'modx-resource-vtabs-header'
-        }
         ,items:[
             {xtype:'ga-tab-visitors' ,id:'ga-tab-visitors' ,title:_('analytics.visitors')}
             ,{xtype:'ga-tab-traffic-sources' ,id:'ga-tab-traffic-sources' ,title: _('analytics.traffic_sources')}
@@ -37,7 +21,7 @@ MODx.panel.GADashboardWidget = function(config) {
             ,{contentEl:'tab5' ,id:'ga-tab-keywords' ,title: _('analytics.keywords')}
             ,{contentEl:'tab6' ,id:'ga-tab-sitesearch' ,title: _('analytics.site_search')}
             ,{xtype: 'ga-tab-settings' ,id:'ga-tab-settings' ,title: _('analytics.settings')}
-        ]
+        ]}]
     });
     MODx.panel.GADashboardWidget.superclass.constructor.call(this,config);
 };
@@ -50,11 +34,10 @@ Ext.reg('ga-panel-dashboard-widget',MODx.panel.GADashboardWidget);
 MODx.panel.GATabVisitors = function(config) {
     config = config || {};
 	var visitors = new Ext.data.JsonStore({
-	  url: GA.connector_url+'?action=data&data=visits&format=json'
-	  ,fields: ['date','visits','pageviews']
+        url: GA.connector_url+'?action=data&data=visits&format=json'
+        ,fields: ['0','1','3']
 	});
 	visitors.load({params: {id: "1"}});
-
     Ext.applyIf(config,{
         border: false
         ,items: [{
@@ -62,16 +45,16 @@ MODx.panel.GATabVisitors = function(config) {
             ,height: 150
             ,store: visitors
             ,url:GA.assets_url+'swf/charts.swf'
-            ,xField: 'date'
+            ,xField: '0'
             ,yAxis: new Ext.chart.NumericAxis({
                 displayName: 'Visits',
                 labelRenderer : Ext.util.Format.numberRenderer('0,0')
             })
             ,tipRenderer : function(chart, record, index, series){
-                if(series.yField == 'visits'){
-                    return record.data.visits + ' visits on ' + record.data.date;
+                if(series.yField == '1'){
+                    return record.data[1] + ' visits on ' + record.data[0];
                 }else{
-                    return record.data.pageviews + ' page views on ' + record.data.date;
+                    return record.data[3] + ' page views on ' + record.data[0];
                 }
             }
             ,chartStyle: {
@@ -114,7 +97,7 @@ MODx.panel.GATabVisitors = function(config) {
             series: [{
                 type: 'line',
                 displayName: 'Page Views',
-                yField: 'pageviews',
+                yField: '3',
                 style: {
                     color:0x0172ce
 
@@ -122,7 +105,7 @@ MODx.panel.GATabVisitors = function(config) {
             },{
                 type:'line',
                 displayName: 'Visits',
-                yField: 'visits',
+                yField: '1',
                 style: {
                     color: 0x6cb1e8
                 }
@@ -147,13 +130,13 @@ MODx.panel.GATabTrafficSources = function(config) {
 
 	var devices = new Ext.data.JsonStore({
 	  url: GA.connector_url+'?action=data&data=devices&format=json',
-	  fields: ['operatingSystem','visits']
+	  fields: ['0','1']
 	});
 	devices.load({params: {id: "1"}});
 
     var mobile = new Ext.data.JsonStore({
       url: GA.connector_url+'?action=data&data=mobile&format=json',
-      fields: ['isMobile','visits']
+      fields: ['key','visits']
     });
     mobile.load({params: {id: "1"}});
 
@@ -205,8 +188,8 @@ MODx.panel.GATabTrafficSources = function(config) {
                     ,items: {
                         store: devices,
                         xtype: 'piechart',
-                        dataField: 'visits',
-                        categoryField: 'operatingSystem',
+                        dataField: '1',
+                        categoryField: '0',
                         series: [{
                             style: {
                                 colors: ["#018bc9", "#49b629", "#f15906", "#eef200"]
@@ -234,7 +217,7 @@ MODx.panel.GATabTrafficSources = function(config) {
 	            store: mobile
 	            ,xtype: 'piechart'
 	            ,dataField: 'visits'
-	            ,categoryField: 'isMobile'
+	            ,categoryField: 'key'
 	            ,series: [{
                     style: {
                         colors: ["#018bc9", "#49b629", "#f15906", "#eef200"]
@@ -268,13 +251,15 @@ MODx.panel.GATabSettings = function(config) {
     Ext.applyIf(config,{
         layout: 'form'
         ,id: 'settingsform'
-        ,cls: 'container form-with-labels'
+        ,cls: 'main-wrapper'
+        ,layout: 'form'
+        ,labelAlign: 'left'
         ,labelWidth: 300
         ,autoHeight: true
-        ,defaults: {
-            anchor: '100%'
-            ,msgTarget: 'under'
-        }
+        // ,defaults: {
+        //     anchor: '100%'
+        //     ,msgTarget: 'under'
+        // }
         ,items: [{
 		    xtype: 'ga-combo-days-amount'
 		    ,fieldLabel: _('analytics.select_days')
@@ -288,73 +273,78 @@ MODx.panel.GATabSettings = function(config) {
 		    ,fieldLabel: _('analytics.select_profile')
 		    ,value: MODx.config.analytics_sitename
 		},{
-                xtype: 'panel'
-                ,border: false
-                ,layout: 'form'
-                ,labelWidth: 100
-                ,fieldLabel: _('analytics.available_tabs')
-                ,items: [{
-                			xtype: 'checkbox'
-                			,fieldLabel: _('analytics.visitors')
-                			,name: 'showvisitors'
-        			        ,inputValue: 1
-        			        ,checked: activeTabs['visitors']
-        			        ,handler: function() {
-        			        	activeTabs['visitors'] = this.getValue();
-								MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs));
-			                }
-                		},{
-                			xtype: 'checkbox'
-                			,fieldLabel: _('analytics.traffic_sources')
-                			,name: 'showtrafficsources'
-        			        ,inputValue: 1
-        			        ,checked: activeTabs['traffic-sources']
-        			        ,handler: function() {
-        			        	activeTabs['traffic-sources'] = this.getValue();
-								MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs));
-			                }
-                		},{
-                			xtype: 'checkbox'
-                			,fieldLabel: _('analytics.top_content')
-                			,name: 'showtopcontent'
-        			        ,inputValue: 1
-        			        ,checked: activeTabs['top-content']
-        			        ,handler: function() {
-        			        	activeTabs['top-content'] = this.getValue();
-								MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs));
-			                }
-                		},{
-                			xtype: 'checkbox'
-                			,fieldLabel: _('analytics.goals')
-                			,name: 'showgoals'
-        			        ,inputValue: 1
-        			        ,checked: activeTabs['goals']
-        			        ,handler: function() {
-        			        	activeTabs['goals'] = this.getValue();
-								MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs));
-			                }        			        
-                		},{
-                			xtype: 'checkbox'
-                			,fieldLabel: _('analytics.keywords')
-                			,name: 'showkeywords'
-        			        ,inputValue: 1
-        			        ,checked: activeTabs['keywords']
-        			        ,handler: function() {
-        			        	activeTabs['keywords'] = this.getValue();
-								MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs));
-			                }        			        
-                		},{
-                			xtype: 'checkbox'
-                			,fieldLabel: _('analytics.site_search')
-                			,name: 'showsitesearch'
-        			        ,inputValue: 1
-        			        ,checked: activeTabs['sitesearch']
-        			        ,handler: function() {
-        			        	activeTabs['sitesearch'] = this.getValue();
-								MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs));
-			                }        			        
-                		}]
-            }]
+            xtype: 'panel'
+            ,border: false
+            ,layout: 'form'
+            ,fieldLabel: _('analytics.available_tabs')
+            ,items: [{
+    			xtype: 'checkbox'
+    			,boxLabel: _('analytics.visitors')
+                ,hideLabel:true
+    			,name: 'showvisitors'
+		        ,inputValue: 1
+		        ,checked: activeTabs['visitors']
+		        ,handler: function() {
+		        	activeTabs['visitors'] = this.getValue();
+					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+                }
+    		},{
+    			xtype: 'checkbox'
+    			,boxLabel: _('analytics.traffic_sources')
+                ,hideLabel:true
+    			,name: 'showtrafficsources'
+		        ,inputValue: 1
+		        ,checked: activeTabs['traffic-sources']
+		        ,handler: function() {
+		        	activeTabs['traffic-sources'] = this.getValue();
+					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+                }
+    		},{
+    			xtype: 'checkbox'
+    			,boxLabel: _('analytics.top_content')
+                ,hideLabel:true
+    			,name: 'showtopcontent'
+		        ,inputValue: 1
+		        ,checked: activeTabs['top-content']
+		        ,handler: function() {
+		        	activeTabs['top-content'] = this.getValue();
+					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+                }
+    		},{
+    			xtype: 'checkbox'
+    			,boxLabel: _('analytics.goals')
+                ,hideLabel:true
+    			,name: 'showgoals'
+		        ,inputValue: 1
+		        ,checked: activeTabs['goals']
+		        ,handler: function() {
+		        	activeTabs['goals'] = this.getValue();
+					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+                }        			        
+    		},{
+    			xtype: 'checkbox'
+    			,boxLabel: _('analytics.keywords')
+                ,hideLabel:true
+    			,name: 'showkeywords'
+		        ,inputValue: 1
+		        ,checked: activeTabs['keywords']
+		        ,handler: function() {
+		        	activeTabs['keywords'] = this.getValue();
+					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+                }        			        
+    		},{
+    			xtype: 'checkbox'
+    			,boxLabel: _('analytics.site_search')
+                ,hideLabel:true
+    			,name: 'showsitesearch'
+		        ,inputValue: 1
+		        ,checked: activeTabs['sitesearch']
+		        ,handler: function() {
+		        	activeTabs['sitesearch'] = this.getValue();
+					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+                }        			        
+    		}]
+        }]
     });
     MODx.panel.GATabSettings.superclass.constructor.call(this,config);
 };
@@ -365,7 +355,7 @@ MODx.panel.GATabGoals = function(config) {
     config = config || {};
 	 var goals = new Ext.data.JsonStore({
 	  url: GA.connector_url+'?action=data&data=goals&format=json',
-	  fields: ['date','oalCompletionsAll']
+	  fields: ['0','5']
 	});
 	goals.load({params: {id: "1"}});
     Ext.applyIf(config,{
@@ -375,9 +365,9 @@ MODx.panel.GATabGoals = function(config) {
             ,store: goals
             ,height: 150
             ,xtype: 'columnchart'
-            ,xField: 'date'
+            ,xField: '0'
             ,tipRenderer : function(chart, record, index, series){
-                return Ext.util.Format.number(record.data.oalCompletionsAll, '0,0') + ' goal completions';
+                return Ext.util.Format.number(record.data[5], '0,0') + ' goal completions';
             }
             ,chartStyle: {
                 animationEnabled: true,
@@ -401,8 +391,8 @@ MODx.panel.GATabGoals = function(config) {
             }
             ,series: [{
                 type: 'line',
-                displayName: 'date',
-                yField: 'oalCompletionsAll',
+                displayName: '0',
+                yField: '5',
                 style: {
                     color:0x0172ce
                 }
@@ -417,7 +407,7 @@ MODx.panel.GATabGoals = function(config) {
 Ext.extend(MODx.panel.GATabGoals,Ext.Panel);
 Ext.reg('ga-tab-goals',MODx.panel.GATabGoals);
 
-MODx.gaUpdateSetting = function (setting,value){
+MODx.gaUpdateSetting = function (setting,value,preventreload){
     Ext.Ajax.request({
         url : GA.connector_url+'?action=settings' ,
         params : { setting : setting, value: value },
@@ -430,7 +420,7 @@ MODx.gaUpdateSetting = function (setting,value){
                    progress:false,
                    closable:false
                });
-            window.location.reload();
+                if(preventreload) window.location.reload();
         }
     });
 };
@@ -451,26 +441,30 @@ MODx.combo.GADaysAmount = function(config) {
             ],
             data: [[3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13], [14], [15], [16], [17], [18], [19], [20], [21], [22], [23], [24], [25], [26], [27], [28], [29], [30]]
         })
-         ,listeners: {
+        ,listeners: {
             select: function(combo, record, index) {
-                MODx.gaUpdateSetting('analytics_days',record.data.days);
+                MODx.gaUpdateSetting('analytics_days',record.data.days,true);
             }
-          }
+        }
         ,valueField: 'days'
         ,displayField: 'days'
         ,editable: false
     });
     MODx.combo.GADaysAmount.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.combo.GADaysAmount,Ext.form.ComboBox);
+Ext.extend(MODx.combo.GADaysAmount,Ext.form.ComboBox,{
+    getParentZIndex : function(){//dirtiest fix i ever used
+        return 9999;
+    }
+});
 Ext.reg('ga-combo-days-amount',MODx.combo.GADaysAmount);
 
 MODx.combo.GACacheTime = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'comboboxcache'
-        ,anchor: '100%'
         ,typeAhead: true
+        ,width:250
         ,triggerAction: 'all'
         ,emptyText: 'select cachingtime in minutes'
         ,mode: 'local'
@@ -484,7 +478,7 @@ MODx.combo.GACacheTime = function(config) {
         })
         ,listeners: {
            select: function(combo, record, index) {
-               MODx.gaUpdateSetting('analytics_cachingtime',record.data.seconds);
+               MODx.gaUpdateSetting('analytics_cachingtime',record.data.seconds,true);
            }
         }
         ,valueField: 'seconds'
@@ -492,7 +486,11 @@ MODx.combo.GACacheTime = function(config) {
     });
     MODx.combo.GACacheTime.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.combo.GACacheTime,Ext.form.ComboBox);
+Ext.extend(MODx.combo.GACacheTime,Ext.form.ComboBox,{
+    getParentZIndex : function(){//dirtiest fix i ever used
+        return 9999;
+    }
+});
 Ext.reg('ga-combo-cache-time',MODx.combo.GACacheTime);
 
 
@@ -501,7 +499,7 @@ MODx.combo.GASiteProfiles = function(config) {
 
 	var profiles = new Ext.data.JsonStore({
 	  url: GA.connector_url+'?action=data&data=profiles&format=json',
-	  fields: ['title','entryid','tableId','accountId','webPropertyId']
+	  fields: ['title','entryid','profileId','accountId','webPropertyId']
 	});
 	profiles.load({params: {id: "1"}});
     Ext.applyIf(config,{
@@ -515,10 +513,10 @@ MODx.combo.GASiteProfiles = function(config) {
         ,editable: false
         ,listeners: {
             select: function(combo, record, index) {
+                 MODx.gaUpdateSetting('analytics_profileId',record.data.profileId);
                  MODx.gaUpdateSetting('analytics_sitename',record.data.title);
                  MODx.gaUpdateSetting('analytics_accountId',record.data.accountId);
-                 MODx.gaUpdateSetting('analytics_profileId',record.data.tableId);
-                 MODx.gaUpdateSetting('analytics_webPropertyId',record.data.webPropertyId);
+                 MODx.gaUpdateSetting('analytics_webPropertyId',record.data.webPropertyId,true);
             }
         }
         ,valueField: 'title'
@@ -526,7 +524,11 @@ MODx.combo.GASiteProfiles = function(config) {
     });
     MODx.combo.GASiteProfiles.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.combo.GASiteProfiles,Ext.form.ComboBox);
+Ext.extend(MODx.combo.GASiteProfiles,Ext.form.ComboBox,{
+    getParentZIndex : function(){//dirtiest fix i ever used
+        return 9999;
+    }
+});
 Ext.reg('ga-combo-site-profile',MODx.combo.GASiteProfiles);
 
 Ext.onReady(function() {

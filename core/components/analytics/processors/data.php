@@ -12,12 +12,18 @@ $analytics = $modx->cacheManager->get($days.'-analytics');
 $data = trim($_GET['data']);
 $format = trim($_GET['format']);
 if(isset($analytics)){
-
 	if($format == 'json'){
-		print(json_encode($analytics[$data]));
+		if(in_array($data, array('trafficsourceschararr', 'mobile', 'goalstable', 'profiles'))){
+			print(json_encode($analytics[$data]));
+		}else{
+			print(json_encode($analytics[$data]['rows']));
+		}
 	}else{
-		print_r($analytics[$data]);
-
+		if(in_array($data, array('trafficsourceschararr', 'mobile', 'goalstable'))){
+			print_r($analytics[$data]);
+		}else{
+			print_r($analytics[$data]['rows']);
+		}
 	}
 }
 die();

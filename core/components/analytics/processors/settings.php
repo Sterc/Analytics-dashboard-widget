@@ -16,7 +16,10 @@ $days = $modx->getOption('analytics_days');
 $analyticsSetting = $modx->getObject('modSystemSetting',$setting);
 
 $analyticsSetting->set('value', $value);
-$analyticsSetting->save();
+if(!$analyticsSetting->save()){
+	return $modx->error->failure();	
+}
+
 $modx->getCacheManager();
 $modx->cacheManager->delete($days.'-analytics');
 

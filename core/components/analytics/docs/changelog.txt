@@ -1,3 +1,14 @@
+Analytics Dashboard widget 1.0.3
+====================================
+- Updated Google OAuth
+- Updated all API requests
+- Changed fix for MODX 2.3 layout
+- Fixed cache when changing profile
+
+Analytics Dashboard widget 1.0.2
+====================================
+- Added quick fix for the dashboard widget layout
+
 Analytics Dashboard widget 1.0.1
 ====================================
 - All data-charts are working again

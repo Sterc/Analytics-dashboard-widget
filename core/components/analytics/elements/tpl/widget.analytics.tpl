@@ -16,16 +16,16 @@
         </tr>
         </thead>
         <tbody>
-        {foreach from=$visitsarr item=visits}
+        {foreach from=$visitsarr.rows item=visits}
         <tr class="{cycle values=',odd'}">
-                <td>{$visits.date}</td>
-                <td>{$visits.visits}</td>
-                <td>{$visits.visitors}</td>
-                <td>{$visits.pageviewsPerVisit|number_format:2:",":"."}  %</td>
-                <td>{$visits.pageviews}</td>
-                <td>{$visits.vgTimeOnSite}</td>
-                <td>{$visits.percentNewVisits|number_format:2:",":"."} %</td>
-                <td>{$visits.visitBounceRate|number_format:2:",":"."} %</td>
+                <td>{$visits.0}</td>
+                <td>{$visits.1}</td>
+                <td>{$visits.2}</td>
+                <td>{$visits.4|number_format:2:",":"."}</td>
+                <td>{$visits.3}</td>
+                <td>{$visits.5|number_format:2}</td>
+                <td>{$visits.6|number_format:2:",":"."} %</td>
+                <td>{$visits.7|number_format:2:",":"."} %</td>
         </tr>
         {foreachelse}
         <tr>
@@ -34,13 +34,13 @@
         {/foreach}
         <tr>
                 <td>{$_langs.total}</td>
-                <td>{$general.visits}</td>
-                <td>{$general.visitors}</td>
-                <td>{$general.pageviewsPerVisit|number_format:2:",":"."} %</td>
-                <td>{$general.pageviews}</td>
-                <td>{$general.vgTimeOnSite}</td>
-                <td>{$general.percentNewVisits|number_format:2:",":"."} %</td>
-                <td>{$general.visitBounceRate|number_format:2:",":"."} %</td>
+                <td>{$visitsarr.totalsForAllResults.visits}</td>
+                <td>{$visitsarr.totalsForAllResults.visitors}</td>
+                <td>{$visitsarr.totalsForAllResults.pageviewsPerVisit|number_format:2:",":"."}</td>
+                <td>{$visitsarr.totalsForAllResults.pageviews}</td>
+                <td>{$visitsarr.totalsForAllResults.avgTimeOnSite|number_format:2}</td>
+                <td>{$visitsarr.totalsForAllResults.percentNewVisits|number_format:2:",":"."} %</td>
+                <td>{$visitsarr.totalsForAllResults.visitBounceRate|number_format:2:",":"."} %</td>
         </tr>
         </tbody>
         </table>
@@ -61,12 +61,12 @@
 	            </thead>
 	            <tbody>
 	            {$i = 0}
-	            {foreach from=$toptrafficsource item=toptraffic}
+	            {foreach from=$toptrafficsource.rows item=toptraffic}
 		            {if $i == 5}{break}{/if}
 			            <tr class="{cycle values=',odd'}">
-			                    <td>{$toptraffic.source}</td>
-			                    <td>{$toptraffic.visits}</td>
-			                    <td>{$toptraffic.percentNewVisits|number_format:2:",":"."} %</td>
+			                    <td>{$toptraffic.0}</td>
+			                    <td>{$toptraffic.1}</td>
+			                    <td>{$toptraffic.5|number_format:2:",":"."} %</td>
 			            </tr>
 		            {$i = $i+1}
 		            {foreachelse}
@@ -87,13 +87,13 @@
 	            <tbody>
 
 	            {$i = 0}
-	            {foreach from=$keywords item=keyword}
+	            {foreach from=$keywords.rows item=keyword}
 		            {if $keyword.keyword != '(not set)'}
 			            {if $i == 5}{break}{/if}
 			            <tr class="{cycle values=',odd'}">
-				                    <td>{$keyword.keyword}</td>
-				                    <td>{$keyword.visits}</td>
-				                    <td>{$keyword.percentNewVisits|number_format:2:",":"."} %</td>
+				                    <td>{$keyword.0}</td>
+				                    <td>{$keyword.1}</td>
+				                    <td>{$keyword.3|number_format:2:",":"."} %</td>
 				            </tr>
 			            {$i = $i+1}
 		            {/if}
@@ -120,17 +120,17 @@
             </thead>
             <tbody>
             {$i = 0}
-            {foreach from=$toptrafficsource item=trafficreffered}
-                 {if $trafficreffered.source != 'google' && $trafficreffered.source != '(direct)' && $trafficreffered.source != 'localhost' && $trafficreffered.source != 'bing' && $trafficreffered.source != 'google.nl'}
+            {foreach from=$toptrafficsource.rows item=trafficreffered}
+                 {if $trafficreffered.0 != 'google' && $trafficreffered.0 != '(direct)' && $trafficreffered.0 != 'localhost' && $trafficreffered.0 != 'bing' && $trafficreffered.0 != 'google.nl'}
                  {if $i == 10}{break}{/if}
 
             <tr class="{cycle values=',odd'}">
-                    <td>{$trafficreffered.source}</td>
-                    <td>{$trafficreffered.visits}</td>
-                    <td>{$trafficreffered.pageviewsPerVisit|number_format:2:",":"."} %</td>
-                    <td>{$trafficreffered.vgTimeOnSite}</td>
-                    <td>{$trafficreffered.percentNewVisits|number_format:2:",":"."} %</td>
-                    <td>{$trafficreffered.visitBounceRate|number_format:2:",":"."} %</td>
+                    <td>{$trafficreffered.0}</td>
+                    <td>{$trafficreffered.1}</td>
+                    <td>{$trafficreffered.3|number_format:2:",":"."} %</td>
+                    <td>{$trafficreffered.4|number_format:2}</td>
+                    <td>{$trafficreffered.5|number_format:2:",":"."} %</td>
+                    <td>{$trafficreffered.6|number_format:2:",":"."} %</td>
             </tr>
             {$i = $i+1}
 
@@ -158,13 +158,13 @@
         </thead>
         <tbody>
         {$i = 0}
-        {foreach from=$toplandingspages item=toppage}
+        {foreach from=$toplandingspages.rows item=toppage}
         {if $i == 10}{break}{/if}
         <tr class="{cycle values=',odd'}">
-                <td>{$toppage.pagePath}</td>
-                <td>{$toppage.entrances}</td>
-                <td>{$toppage.bounces}</td>
-                <td>{$toppage.entranceBounceRate|number_format:2:",":"."} %</td>
+                <td>{$toppage.0}</td>
+                <td>{$toppage.1}</td>
+                <td>{$toppage.2}</td>
+                <td>{$toppage.3|number_format:2:",":"."} %</td>
 
         </tr>
          {$i = $i+1}
@@ -187,13 +187,13 @@
         </thead>
         <tbody>
         {$i = 0}
-         {foreach from=$topexitpages item=exitpage}
+         {foreach from=$topexitpages.rows item=exitpage}
         {if $i == 10}{break}{/if}
         <tr class="{cycle values=',odd'}">
-                <td>{$exitpage.pagePath}</td>
-                <td>{$exitpage.exits}</td>
-                <td>{$exitpage.pageviews}</td>
-                <td>{$exitpage.exitRate|number_format:2:",":"."} %</td>
+                <td>{$exitpage.0}</td>
+                <td>{$exitpage.1}</td>
+                <td>{$exitpage.2}</td>
+                <td>{$exitpage.3|number_format:2:",":"."} %</td>
 
         </tr>
          {$i = $i+1}
@@ -242,16 +242,16 @@
         </thead>
         <tbody>
         {$i = 0}
-         {foreach from=$keywords item=keyword}
+         {foreach from=$keywords.rows item=keyword}
          {if $keyword.keyword != '(not set)'}
          {if $i == 20}{break}{/if}
         <tr class="{cycle values=',odd'}">
-                <td>{$keyword.keyword}</td>
-                <td>{$keyword.visits}</td>
-                <td>{$keyword.pageviewsPerVisit|number_format:2:",":"."} %</td>
-                <td>{$keyword.vgTimeOnSite}</td>
-                <td>{$keyword.percentNewVisits|number_format:2:",":"."} %</td>
-                <td>{$keyword.visitBounceRate|number_format:2:",":"."} %</td>
+                <td>{$keyword.0}</td>
+                <td>{$keyword.1}</td>
+                <td>{$keyword.2|number_format:2:",":"."} %</td>
+                <td>{$keyword.3|number_format:2}</td>
+                <td>{$keyword.4|number_format:2:",":"."} %</td>
+                <td>{$keyword.5|number_format:2:",":"."} %</td>
         </tr>
         {$i = $i+1}
         {/if}
@@ -278,15 +278,15 @@
         </thead>
         <tbody>
         {$i = 0}
-         {foreach from=$sitesearches item=sitesearch}
+         {foreach from=$sitesearches.rows item=sitesearch}
          {if $i == 20}{break}{/if}
         <tr class="{cycle values=',odd'}">
-                <td>{$sitesearch.searchKeyword}</td>
-                <td>{$sitesearch.searchUniques}</td>
-                <td>{$sitesearch.searchResultViews}</td>
-                <td>{$sitesearch.searchExitRate|number_format:2:",":"."}  %</td>
-                <td>{$sitesearch.searchDuration}</td>
-                <td>{$sitesearch.searchDepth}</td>
+                <td>{$sitesearch.0}</td>
+                <td>{$sitesearch.1}</td>
+                <td>{$sitesearch.2}</td>
+                <td>{$sitesearch.3|number_format:2:",":"."}  %</td>
+                <td>{$sitesearch.4}</td>
+                <td>{$sitesearch.5}</td>
         </tr>
         {$i = $i+1}
         {foreachelse}

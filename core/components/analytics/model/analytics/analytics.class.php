@@ -24,29 +24,16 @@ class GoogleAnalytics {
         
     }
 
-	public function getSessionToken($onetimetoken) {
-		$output = $this->callApi($onetimetoken, "https://www.google.com/accounts/AuthSubSessionToken");
-		if (preg_match("/Token=(.*)/", $output, $matches))
-		{
-			$sessionToken = $matches[1];
-		} else {
-			echo "Error authenticating with Google.";
-			exit;
-		}
-
-		return $sessionToken;
-	}
-
 	/**
      * @param string $sessionToken
      * @param string $url
      * @return mixed
      */
 	public function callApi($token,$url){
+		$accessToken = (array)json_decode($token);
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_URL, $url.'&access_token='.$accessToken['access_token']);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$curlheader[0] = sprintf("Authorization: AuthSub token=\"%s\"/n", $token);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $curlheader);
 		$output = curl_exec($ch);
 		curl_close($ch);
@@ -64,6 +51,7 @@ class GoogleAnalytics {
      * @return array
      */
 	public function parseData($xml){
+		return (array)json_decode($xml);
 		$doc = new DOMDocument();
 		$doc->loadXML($xml);
 
@@ -83,9 +71,9 @@ class GoogleAnalytics {
 					} else {
 						$value = date('Y-m-d',strtotime($dimension->getAttribute('value')));
 					}
-					$results[$i][ltrim($dimension->getAttribute("name"),"ga:")] =  $value;
+					$results[$i][ltrim($dimension->getAttribute("name"),"ga:")] = $value;
 				} else {
-					$results[$i][ltrim($dimension->getAttribute("name"),"ga:")] =  $dimension->getAttribute('value');
+					$results[$i][ltrim($dimension->getAttribute("name"),"ga:")] = $dimension->getAttribute('value');
 				}
 			}
 
@@ -93,9 +81,9 @@ class GoogleAnalytics {
 			/** @var DOMElement $metric */
 			foreach ($metrics as $metric) {
 				if ($metric->getAttribute('name') == 'ga:avgTimeOnSite'){
-					$results[$i][ltrim($metric->getAttribute('name'),"ga:")] =  $this->secondMinute($metric->getAttribute('value'));
+					$results[$i][ltrim($metric->getAttribute('name'),"ga:")] = $this->secondMinute($metric->getAttribute('value'));
 				} else {
-					$results[$i][ltrim($metric->getAttribute('name'),"ga:")] =  $metric->getAttribute('value');
+					$results[$i][ltrim($metric->getAttribute('name'),"ga:")] = $metric->getAttribute('value');
 				}
 			}
 
@@ -108,21 +96,14 @@ class GoogleAnalytics {
      * @param string $xml
      * @return array
      */
-	public function parseDataGoals($xml) {
-		$doc = new DOMDocument();
-		$doc->loadXML($xml);
-
-		$entries = $doc->getElementsByTagName('entry');
+	public function parseDataGoals($goals) {
+		$data = $this->modx->fromJSON($goals);
 		$i = 0;
 		$results = array();
 		/** @var DOMElement $entry */
-		foreach ($entries as $entry) {
-            $goals = $entry->getElementsByTagName('goal');
-            /** @var DOMElement $goal */
-            foreach ($goals as $goal) {
-                $results[$i]['id'] = $goal->getAttribute('number');
-                $results[$i]['goalname'] = $goal->getAttribute('name');
-            }
+		foreach ($data['items'] as $goal) {
+            $results[$i]['id'] = $goal['id'];
+            $results[$i]['goalname'] = $goal['name'];
             $i++;
 		}
 		return $results;
@@ -133,46 +114,34 @@ class GoogleAnalytics {
      * @param string $xml
      * @return array
      */
-	public function parseAccountList($xml){
-		$doc = new DOMDocument();
-		if(stripos($xml,"<") !== FALSE)
-		{
-			$doc->loadXML($xml);
-			$entries = $doc->getElementsByTagName('entry');
-			$i = 0;
-			$profiles= array();
-			foreach($entries as $entry)
-			{
-				$profiles[$i] = array();
+	public function parseAccountList($accounts){
+		$output = array();
+        $items = $accounts->getItems();
+        $i = 0;
+        if(count($items) > 0) {
+            foreach ($items as $item) { 
+            	// print_r($item);
+            	// exit;
+                $wps = $item->getWebProperties();
+                if(count($wps) > 0){
+                    foreach($wps as $wp){   
+		            	$views = $wp->getProfiles();                                                    
+                        if((!is_null($views)) && (count($views) > 0)){
+                            foreach($views as $view){
+		                        $output[$i] = array();
+				            	$output[$i]["title"] = $item->getName().' - '.$view->getName();
+				            	$output[$i]["accountId"] = $item->getId();
+				            	$output[$i]["profileId"] = $view->getId();
+				            	$output[$i]["webPropertyId"] = $wp->getId();
+				                $i++;
+							}                        
+                        }
+                    }
+                }
+            }
+        }
 
-				$title = $entry->getElementsByTagName('title');
-				$profiles[$i]["title"] = $title->item(0)->nodeValue;
-
-				$entryid = $entry->getElementsByTagName('id');
-				$profiles[$i]["entryid"] = $entryid->item(0)->nodeValue;
-
-				// $tableId = $entry->getElementsByTagName('tableId');
-				// $profiles[$i]["tableId"] = $tableId->item(0)->nodeValue;
-				
-				$properties = $entry->getElementsByTagName('property');
-			        foreach($properties as $property) {
-						if($property->getAttribute('name') == 'ga:accountId'){
-								$profiles[$i]["accountId"] = $property->getAttribute('value');
-						}
-						if($property->getAttribute('name') == 'ga:webPropertyId'){
-								$profiles[$i]["webPropertyId"] = $property->getAttribute('value');
-						}
-						if($property->getAttribute('name') == 'dxp:tableId'){
-								$profiles[$i]["tableId"] = $property->getAttribute('value');
-						}
-			        }
-				$i++;
-			}
-			return $profiles;
-		} else {
-			$sessionToken = "Authentication Failed.";
-		}
-        return array();
+        return $output;
 	}
 
     /**
@@ -202,15 +171,7 @@ class GoogleAnalytics {
 		$protocol = substr(strtolower($_SERVER["SERVER_PROTOCOL"]), 0, strpos(strtolower($_SERVER["SERVER_PROTOCOL"]), "/")) . $s;
 		$port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":".$_SERVER["SERVER_PORT"]);
 
-		//Fix for the strange bug of Google's authenticating 
-		$domainParts = explode('.', $_SERVER['SERVER_NAME']);
-		if($domainParts[0] == 'www'){
-			$domainParts[1] = ucfirst($domainParts[1]);
-		}else{
-			$domainParts[0] = ucfirst($domainParts[0]);
-		}
-
-		return $protocol . "://" . implode('.', $domainParts) . $port . $_SERVER['REQUEST_URI'];
+		return $protocol . "://" . $_SERVER['HTTP_HOST'] . $port . $_SERVER['REQUEST_URI'];
 	}
 
 

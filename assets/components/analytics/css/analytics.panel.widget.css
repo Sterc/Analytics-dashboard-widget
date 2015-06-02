@@ -11,14 +11,18 @@ body {
 	width: 100%;
 	background: black;
 }
-
+.vertical-tabs-panel .x-tab-panel-bwrap .vertical-tabs-body{
+	padding: 15px 20px 65px 15px;
+}
 .dashboard-block .body{max-height: inherit; }
 #modx-dashboard .dashboard-block-double{min-height: inherit;}
-#analytics-panel-widget{margin: -10px;}
 
+#analytics-panel-widget{margin: -10px;}
+.dashboard-block #analytics-panel-widget ul{padding: 0 0 0 0;}
 
 #analytics-panel-widget .vertical-tabs-header{ padding:0 !important; border:none !important;}
 #analytics-panel-widget .vertical-tabs-header ul {border:none;}
+#analytics-panel-widget .vertical-tabs-body{margin-left:175px;  min-height:310px;}
 
 #analytics-panel-widget table.classy {
 border-spacing: 0;

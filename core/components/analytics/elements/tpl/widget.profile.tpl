@@ -5,12 +5,12 @@
 			<label for='tableId'>{$_langs.site_select}</label>
 			<select name="siteSelect" id="siteSelect">
 			{foreach $profiles as $profile}
-				<option value="{$profile.title}|{$profile.accountId}|{$profile.tableId}|{$profile.webPropertyId}">{$profile.title}</option>
+				<option value="{$profile.title}|{$profile.accountId}|{$profile.profileId}|{$profile.webPropertyId}">{$profile.title}</option>
 			{/foreach}
 			</select>
 		</p>
 		<p>
-			<input type="submit" value="Submit" onClick="showMask('test');"/>
+			<input type="submit" value="Submit" onClick="showMask('');"/>
 			<script type="text/javascript">
 			{literal}
 			function showMask(){

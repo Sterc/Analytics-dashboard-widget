@@ -23,9 +23,9 @@ $settings['analytics_profileId']->fromArray(array(
     'area' => '',
 ),'',true,true);
 
-$settings['analytics_sessionToken']= $modx->newObject('modSystemSetting');
-$settings['analytics_sessionToken']->fromArray(array(
-    'key' => 'analytics_sessionToken',
+$settings['analytics_refreshToken']= $modx->newObject('modSystemSetting');
+$settings['analytics_refreshToken']->fromArray(array(
+    'key' => 'analytics_refreshToken',
     'value' => '',
     'xtype' => 'textfield',
     'namespace' => 'analytics',
