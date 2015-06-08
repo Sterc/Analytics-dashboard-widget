@@ -1,3 +1,7 @@
+Analytics Dashboard widget 1.0.4
+====================================
+-Fixed errors in modx log #5
+
 Analytics Dashboard widget 1.0.3
 ====================================
 - Updated Google OAuth

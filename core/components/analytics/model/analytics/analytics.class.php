@@ -34,7 +34,6 @@ class GoogleAnalytics {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url.'&access_token='.$accessToken['access_token']);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $curlheader);
 		$output = curl_exec($ch);
 		curl_close($ch);
 		return $output;
