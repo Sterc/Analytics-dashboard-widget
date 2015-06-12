@@ -12,4 +12,6 @@
 			</span>
 		</div>
 	</form>
+	{if $error}<p style="color:red;"><br/>{$error}</p>{/if}
+
 </div>

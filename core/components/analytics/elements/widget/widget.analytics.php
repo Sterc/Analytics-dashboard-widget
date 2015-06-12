@@ -122,7 +122,17 @@ $token = $client->getAccessToken();
 $client->setAccessToken($token);
 $gsaCls = new Google_Service_Analytics($client);
 //retrieve profiles
-$accounts = $gsaCls->management_accountSummaries->listManagementAccountSummaries();
+try {
+    $accounts = $gsaCls->management_accountSummaries->listManagementAccountSummaries();
+} catch (Exception $e) {
+
+    $modx->smarty->assign('_langs', $lexicon);
+    $modx->smarty->assign('authUrl',$client->createAuthUrl());
+    $modx->smarty->assign('redirect_url',$client->createAuthUrl());
+    $modx->smarty->assign('error',$e->getMessage());
+
+    return $modx->smarty->fetch($ga->config['elementsPath'].'tpl/widget.auth.tpl');
+}
 //print_r($accounts);
 $profiles = $ga->parseAccountList($accounts);
 //print_r($profiles);exit;
