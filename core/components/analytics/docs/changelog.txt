@@ -1,3 +1,7 @@
+Analytics Dashboard widget 1.0.5
+====================================
+-Fixed error when authorizing with non analytics account #6
+
 Analytics Dashboard widget 1.0.4
 ====================================
 -Fixed errors in modx log #5
