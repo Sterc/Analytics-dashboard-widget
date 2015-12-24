@@ -1,11 +1,10 @@
 Google Analytics Dashboard for MODX
 ==========================
 Current version: 1.0.5-pl
+
 Author: Sterc <modx@sterc.nl>
 
-A custom MODX Dashboard Widget that will show data from Google Analytics.
-
-You need a Google Analytics account to use this plugin.
+A custom MODX Dashboard Widget that will show data from Google Analytics. A Google Analytics account is required to use this plugin.
 
 
 --------------------
