@@ -1,4 +1,4 @@
-var activeTabs = Ext.decode(MODx.config.analytics_activetabs);
+var activeTabs = Ext.decode(MODx.config.analyticsdashboardwidget.activetabs);
 
 Ext.chart.Chart.CHART_URL=GA.assets_url+'swf/charts.swf';
 
@@ -263,15 +263,15 @@ MODx.panel.GATabSettings = function(config) {
         ,items: [{
 		    xtype: 'ga-combo-days-amount'
 		    ,fieldLabel: _('analytics.select_days')
-            ,value: MODx.config.analytics_days
+            ,value: MODx.config.analyticsdashboardwidget.days
         },{
 		    xtype: 'ga-combo-cache-time'
 		    ,fieldLabel: _('analytics.cachingtime')
-            ,value: MODx.config.analytics_cachingtime
+            ,value: MODx.config.analyticsdashboardwidget.cachingtime
 		},{
 		    xtype: 'ga-combo-site-profile'
 		    ,fieldLabel: _('analytics.select_profile')
-		    ,value: MODx.config.analytics_sitename
+		    ,value: MODx.config.analyticsdashboardwidget.sitename
 		},{
             xtype: 'panel'
             ,border: false
@@ -286,7 +286,7 @@ MODx.panel.GATabSettings = function(config) {
 		        ,checked: activeTabs['visitors']
 		        ,handler: function() {
 		        	activeTabs['visitors'] = this.getValue();
-					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+					MODx.gaUpdateSetting('analyticsdashboardwidget.activetabs',Ext.encode(activeTabs),true);
                 }
     		},{
     			xtype: 'checkbox'
@@ -297,7 +297,7 @@ MODx.panel.GATabSettings = function(config) {
 		        ,checked: activeTabs['traffic-sources']
 		        ,handler: function() {
 		        	activeTabs['traffic-sources'] = this.getValue();
-					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+					MODx.gaUpdateSetting('analyticsdashboardwidget.activetabs',Ext.encode(activeTabs),true);
                 }
     		},{
     			xtype: 'checkbox'
@@ -308,7 +308,7 @@ MODx.panel.GATabSettings = function(config) {
 		        ,checked: activeTabs['top-content']
 		        ,handler: function() {
 		        	activeTabs['top-content'] = this.getValue();
-					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+					MODx.gaUpdateSetting('analyticsdashboardwidget.activetabs',Ext.encode(activeTabs),true);
                 }
     		},{
     			xtype: 'checkbox'
@@ -319,7 +319,7 @@ MODx.panel.GATabSettings = function(config) {
 		        ,checked: activeTabs['goals']
 		        ,handler: function() {
 		        	activeTabs['goals'] = this.getValue();
-					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+					MODx.gaUpdateSetting('analyticsdashboardwidget.activetabs',Ext.encode(activeTabs),true);
                 }        			        
     		},{
     			xtype: 'checkbox'
@@ -330,7 +330,7 @@ MODx.panel.GATabSettings = function(config) {
 		        ,checked: activeTabs['keywords']
 		        ,handler: function() {
 		        	activeTabs['keywords'] = this.getValue();
-					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+					MODx.gaUpdateSetting('analyticsdashboardwidget.activetabs',Ext.encode(activeTabs),true);
                 }        			        
     		},{
     			xtype: 'checkbox'
@@ -341,7 +341,7 @@ MODx.panel.GATabSettings = function(config) {
 		        ,checked: activeTabs['sitesearch']
 		        ,handler: function() {
 		        	activeTabs['sitesearch'] = this.getValue();
-					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+					MODx.gaUpdateSetting('analyticsdashboardwidget.activetabs',Ext.encode(activeTabs),true);
                 }        			        
     		}]
         }]
@@ -443,7 +443,7 @@ MODx.combo.GADaysAmount = function(config) {
         })
         ,listeners: {
             select: function(combo, record, index) {
-                MODx.gaUpdateSetting('analytics_days',record.data.days,true);
+                MODx.gaUpdateSetting('analyticsdashboardwidget.days',record.data.days,true);
             }
         }
         ,valueField: 'days'
@@ -478,7 +478,7 @@ MODx.combo.GACacheTime = function(config) {
         })
         ,listeners: {
            select: function(combo, record, index) {
-               MODx.gaUpdateSetting('analytics_cachingtime',record.data.seconds,true);
+               MODx.gaUpdateSetting('analyticsdashboardwidget.cachingtime',record.data.seconds,true);
            }
         }
         ,valueField: 'seconds'
@@ -513,10 +513,10 @@ MODx.combo.GASiteProfiles = function(config) {
         ,editable: false
         ,listeners: {
             select: function(combo, record, index) {
-                 MODx.gaUpdateSetting('analytics_profileId',record.data.profileId);
-                 MODx.gaUpdateSetting('analytics_sitename',record.data.title);
-                 MODx.gaUpdateSetting('analytics_accountId',record.data.accountId);
-                 MODx.gaUpdateSetting('analytics_webPropertyId',record.data.webPropertyId,true);
+                 MODx.gaUpdateSetting('analyticsdashboardwidget.profileId',record.data.profileId);
+                 MODx.gaUpdateSetting('analyticsdashboardwidget.sitename',record.data.title);
+                 MODx.gaUpdateSetting('analyticsdashboardwidget.accountId',record.data.accountId);
+                 MODx.gaUpdateSetting('analyticsdashboardwidget.webPropertyId',record.data.webPropertyId,true);
             }
         }
         ,valueField: 'title'

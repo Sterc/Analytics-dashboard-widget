@@ -13,7 +13,7 @@
         "type": "file",
         "content": "widget.analytics.php",
         "lexicon": "analyticsdashboardwidget:default",
-        "size": "double",
+        "size": "double"
       }]
     },
     "systemSettings": [{

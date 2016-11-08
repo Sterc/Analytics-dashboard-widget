@@ -1,3 +1,4 @@
 # ignore mac files
 .DS_Store
 .idea
+config.core.php

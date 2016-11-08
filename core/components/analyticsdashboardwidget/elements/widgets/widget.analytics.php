@@ -4,8 +4,8 @@
  */
 /* load the analytics lexicon into the JS lexicon */
 //load class
-$corePath = $modx->getOption('analytics.core_path',null,$modx->getOption('core_path').'components/analytics/');
-require_once $corePath.'model/analytics/analytics.class.php';
+$corePath = $modx->getOption('analyticsdashboardwidget.core_path',null,$modx->getOption('core_path').'components/analyticsdashboardwidget/');
+require_once $corePath.'model/analyticsdashboardwidget/analyticsdashboardwidget.class.php';
 require_once($corePath.'model/google-api-php-client/src/Google/Client.php');
 require_once($corePath.'model/google-api-php-client/src/Google/Service/Analytics.php');
 
@@ -33,10 +33,10 @@ $sitename = $modx->getOption('analytics_sitename');
 $days = $modx->getOption('analytics_days',null,7);
 //Get the settings
 $settings = array(
-    'refreshToken'=> trim($modx->getOption('analytics_refreshToken')),
-    'profileId'=> trim($modx->getOption('analytics_profileId')),
-    'accountId'=> trim($modx->getOption('analytics_accountId')),
-    'webPropertyId'=> trim($modx->getOption('analytics_webPropertyId')),
+    'refreshToken'=> trim($modx->getOption('analyticsdashboardwidget.refreshToken')),
+    'profileId'=> trim($modx->getOption('analyticsdashboardwidget.profileId')),
+    'accountId'=> trim($modx->getOption('analyticsdashboardwidget.accountId')),
+    'webPropertyId'=> trim($modx->getOption('analyticsdashboardwidget.webPropertyId')),
     'start_date' => date('Y-m-d', strtotime('-'.($days-1).' day',time())),
     'end_date' => date('Y-m-d'),
 );
@@ -57,7 +57,7 @@ if((isset($_POST['auth_code'])) && ($_POST['auth_code'] != '')){    // authoriza
 
     $client->setAccessToken($token);                                // set access token
 
-    $Setting = $modx->getObject('modSystemSetting', 'analytics_refreshToken');
+    $Setting = $modx->getObject('modSystemSetting', 'analyticsdashboardwidget.refreshToken');
     $Setting->set('value', trim($refreshToken));
     $Setting->save();
     $settings['refreshToken'] = trim($refreshToken);
@@ -88,17 +88,17 @@ if (!empty($_POST['siteSelect'])) {
 
     //print_r(explode("|", $_POST['siteSelect']));exit;
     /** @var modSystemSetting $setting */
-    $setting = $modx->getObject('modSystemSetting', 'analytics_profileId');
+    $setting = $modx->getObject('modSystemSetting', 'analyticsdashboardwidget.profileId');
     $settings['profileId'] = trim($profileId);
     $setting->set('value', trim($profileId));
     $setting->save();
 
-    $setting = $modx->getObject('modSystemSetting', 'analytics_accountId');
+    $setting = $modx->getObject('modSystemSetting', 'analyticsdashboardwidget.accountId');
     $settings['accountId'] = trim($accountId);
     $setting->set('value', trim($accountId));
     $setting->save();
 
-    $setting = $modx->getObject('modSystemSetting', 'analytics_webPropertyId');
+    $setting = $modx->getObject('modSystemSetting', 'analyticsdashboardwidget.webPropertyId');
     $settings['webPropertyId'] = trim($webPropertyId);
     $setting->set('value', trim($webPropertyId));
     $setting->save();
@@ -290,7 +290,7 @@ if (empty($analytics)) {
     $analytics['days'] = $days;
 //print_r($analytics);exit;
     //array to cache
-    $modx->cacheManager->set($days.'-analytics',$analytics,$modx->getOption('analytics_cachingtime',null,3600));
+    $modx->cacheManager->set($days.'-analytics',$analytics,$modx->getOption('analyticsdashboardwidget.cachingtime',null,3600));
 
 } else {
 	foreach ($analytics as $k => $analyticsdata) {
