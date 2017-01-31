@@ -158,7 +158,6 @@ if (empty($settings['profileId']) || empty($settings['accountId']) || empty($set
 
 //load header scripts
 $modx->regClientCSS($ga->config['assetsUrl'].'css/analytics.panel.widget.css');
-$modx->regClientStartupScript('<script type="text/javascript">var days = '.$days.';</script>');
 $modx->regClientStartupScript($ga->config['assetsUrl'].'js/analytics.panel.widget.js');
 $modx->regClientStartupScript('<script type="text/javascript">var days = '.$days.';</script>');
 
