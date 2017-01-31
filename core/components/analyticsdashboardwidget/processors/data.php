@@ -3,7 +3,7 @@
  * @var modX $modx
  * @var array $scriptProperties
  */
-$setting = $modx->getObject('modSystemSetting', 'analytics_days');
+$setting = $modx->getObject('modSystemSetting', 'analyticsdashboardwidget.days');
 $days = $setting->get('value');
 $modx->getCacheManager();
 

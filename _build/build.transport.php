@@ -43,12 +43,12 @@ define('PKG_RELEASE','pl');
 $root = dirname(dirname(__FILE__)).'/';
 //print($root);exit;
 $sources= array (
-    'root' => $root.'analytics/',
+    'root' => $root.'analyticsdashboardwidget/',
     'build' => $root .'_build/',
     'data' => $root . '_build/data/',
-    'source_core' => $root.'core/components/analytics',
-    'source_assets' => $root.'assets/components/analytics',
-    'docs' => $root.'core/components/analytics'.'/docs/',
+    'source_core' => $root.'core/components/analyticsdashboardwidget',
+    'source_assets' => $root.'assets/components/analyticsdashboardwidget',
+    'docs' => $root.'core/components/analyticsdashboardwidget'.'/docs/',
 
 );
 
@@ -70,7 +70,7 @@ $modx->setLogTarget('ECHO');
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
 $builder->createPackage(PKG_NAME_LOWER,PKG_VERSION,PKG_RELEASE);
-$builder->registerNamespace('analytics',false,true,'{core_path}components/analytics'.'/');
+$builder->registerNamespace('analyticsdashboardwidget',false,true,'{core_path}components/analyticsdashboardwidget'.'/');
 
 /* create category */
 $category= $modx->newObject('modCategory');
@@ -102,13 +102,13 @@ unset($settings,$setting);
 $widgets = array();
 $widgets[1]= $modx->newObject('modDashboardWidget');
 $widgets[1]->fromArray(array (
-  'name' => 'analytics',
+  'name' => 'analyticsdashboardwidget',
   'description' => 'Google Analytics dashboard widget',
   'type' => 'file',
   'size' => 'double',
-  'content' => '[[++core_path]]components/analytics/elements/widget/widget.analytics.php',
-  'namespace' => 'analytics',
-  'lexicon' => 'analytics:default',
+  'content' => '[[++core_path]]components/analyticsdashboardwidget/elements/widget/widget.analytics.php',
+  'namespace' => 'analyticsdashboardwidget',
+  'lexicon' => 'analyticsdashboardwidget:default',
 ), '', true, true);
 
 /* modDashboardWidget */
