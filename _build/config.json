@@ -1,0 +1,45 @@
+{
+  "name": "Analytics Dashboard Widget",
+  "lowCaseName": "analyticsdashboardwidget",
+  "description": "A custom MODX Dashboard Widget that will show data from Google Analytics.",
+  "author": "Sterc",
+  "version": "1.0.5",
+  "package":{
+    "menus": [],
+    "elements": {
+      "widgets": [{
+        "name": "analytics",
+        "description": "Google Analytics dashboard widget",
+        "type": "file",
+        "content": "widget.analytics.php",
+        "lexicon": "analyticsdashboardwidget:default",
+        "size": "double"
+      }]
+    },
+    "systemSettings": [{
+      "key": "accountId",
+      "value": ""
+    },{
+      "key": "profileId",
+      "value": ""
+    },{
+      "key": "refreshToken",
+      "value": ""
+    },{
+      "key": "webPropertyId",
+      "value": ""
+    },{
+      "key": "days",
+      "value": "7"
+    },{
+      "key": "cachingtime",
+      "value": "3600"
+    },{
+      "key": "sitename",
+      "value": ""
+    },{
+      "key": "activetabs",
+      "value": "{\"visitors\":true,\"traffic-sources\":true,\"top-content\":true,\"goals\":true,\"keywords\":true,\"sitesearch\":true}"
+    }]
+  }
+}

@@ -7,7 +7,7 @@ $setting = trim($_POST['setting']);
 $value = trim($_POST['value']);
 unset($_POST['setting']);
 unset($_POST['value']);
-$days = $modx->getOption('analytics_days');
+$days = $modx->getOption('analyticsdashboardwidget.days');
 
 //$modx->setOption($setting, $value);
 

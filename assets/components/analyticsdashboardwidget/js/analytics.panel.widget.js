@@ -1,7 +1,6 @@
-var activeTabs = Ext.decode(MODx.config.analytics_activetabs);
+var activeTabs = Ext.decode(MODx.config['analyticsdashboardwidget.activetabs']);
 
-Ext.chart.Chart.CHART_URL=GA.assets_url+'swf/charts.swf';
-
+Ext.chart.Chart.CHART_URL = GA.assets_url + 'swf/charts.swf';
 
 MODx.panel.GADashboardWidget = function(config) {
     config = config || {};
@@ -14,13 +13,13 @@ MODx.panel.GADashboardWidget = function(config) {
         ,border:false
         ,monitorResize:true
         ,items:[
-            {xtype:'ga-tab-visitors' ,id:'ga-tab-visitors' ,title:_('analytics.visitors')}
-            ,{xtype:'ga-tab-traffic-sources' ,id:'ga-tab-traffic-sources' ,title: _('analytics.traffic_sources')}
-            ,{contentEl:'tab3' ,id:'ga-tab-top-content' ,title: _('analytics.top_content')}
-            ,{xtype: 'ga-tab-goals' ,id:'ga-tab-goals' ,title: _('analytics.goals')}
-            ,{contentEl:'tab5' ,id:'ga-tab-keywords' ,title: _('analytics.keywords')}
-            ,{contentEl:'tab6' ,id:'ga-tab-sitesearch' ,title: _('analytics.site_search')}
-            ,{xtype: 'ga-tab-settings' ,id:'ga-tab-settings' ,title: _('analytics.settings')}
+            {xtype:'ga-tab-visitors' ,id:'ga-tab-visitors' ,title:_('analyticsdashboardwidget.visitors')}
+            ,{xtype:'ga-tab-traffic-sources' ,id:'ga-tab-traffic-sources' ,title: _('analyticsdashboardwidget.traffic_sources')}
+            ,{contentEl:'tab3' ,id:'ga-tab-top-content' ,title: _('analyticsdashboardwidget.top_content')}
+            ,{xtype: 'ga-tab-goals' ,id:'ga-tab-goals' ,title: _('analyticsdashboardwidget.goals')}
+            ,{contentEl:'tab5' ,id:'ga-tab-keywords' ,title: _('analyticsdashboardwidget.keywords')}
+            ,{contentEl:'tab6' ,id:'ga-tab-sitesearch' ,title: _('analyticsdashboardwidget.site_search')}
+            ,{xtype: 'ga-tab-settings' ,id:'ga-tab-settings' ,title: _('analyticsdashboardwidget.settings')}
         ]}]
     });
     MODx.panel.GADashboardWidget.superclass.constructor.call(this,config);
@@ -151,7 +150,7 @@ MODx.panel.GATabTrafficSources = function(config) {
 				border: false
                 ,items: [{
                     url:GA.assets_url+'swf/charts.swf'
-                    ,title: _('analytics.traffic_char_header')
+                    ,title: _('analyticsdashboardwidget.traffic_char_header')
                     ,border: false
                     ,width: 410
                     ,height: 200
@@ -181,7 +180,7 @@ MODx.panel.GATabTrafficSources = function(config) {
 				border: false
                 ,items: [{
                     url:GA.assets_url+'swf/charts.swf'
-                    ,title: _('analytics.platform_char_header')
+                    ,title: _('analyticsdashboardwidget.platform_char_header')
                     ,border: false
                     ,width: 410
                     ,height: 200
@@ -209,7 +208,7 @@ MODx.panel.GATabTrafficSources = function(config) {
                 }]
         },{ 
             url:GA.assets_url+'swf/charts.swf'
-            ,title: _('analytics.mobile_char_header')
+            ,title: _('analyticsdashboardwidget.mobile_char_header')
             ,border: false
             ,width: 410
             ,height: 200
@@ -262,86 +261,86 @@ MODx.panel.GATabSettings = function(config) {
         // }
         ,items: [{
 		    xtype: 'ga-combo-days-amount'
-		    ,fieldLabel: _('analytics.select_days')
-            ,value: MODx.config.analytics_days
+		    ,fieldLabel: _('analyticsdashboardwidget.select_days')
+            ,value: MODx.config['analyticsdashboardwidget.days']
         },{
 		    xtype: 'ga-combo-cache-time'
-		    ,fieldLabel: _('analytics.cachingtime')
-            ,value: MODx.config.analytics_cachingtime
+		    ,fieldLabel: _('analyticsdashboardwidget.cachingtime')
+            ,value: MODx.config['analyticsdashboardwidget.cachingtime']
 		},{
 		    xtype: 'ga-combo-site-profile'
-		    ,fieldLabel: _('analytics.select_profile')
-		    ,value: MODx.config.analytics_sitename
+		    ,fieldLabel: _('analyticsdashboardwidget.select_profile')
+		    ,value: MODx.config['analyticsdashboardwidget.sitename']
 		},{
             xtype: 'panel'
             ,border: false
             ,layout: 'form'
-            ,fieldLabel: _('analytics.available_tabs')
+            ,fieldLabel: _('analyticsdashboardwidget.available_tabs')
             ,items: [{
     			xtype: 'checkbox'
-    			,boxLabel: _('analytics.visitors')
+    			,boxLabel: _('analyticsdashboardwidget.visitors')
                 ,hideLabel:true
     			,name: 'showvisitors'
 		        ,inputValue: 1
 		        ,checked: activeTabs['visitors']
 		        ,handler: function() {
 		        	activeTabs['visitors'] = this.getValue();
-					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+					MODx.gaUpdateSetting('analyticsdashboardwidget.activetabs',Ext.encode(activeTabs),true);
                 }
     		},{
     			xtype: 'checkbox'
-    			,boxLabel: _('analytics.traffic_sources')
+    			,boxLabel: _('analyticsdashboardwidget.traffic_sources')
                 ,hideLabel:true
     			,name: 'showtrafficsources'
 		        ,inputValue: 1
 		        ,checked: activeTabs['traffic-sources']
 		        ,handler: function() {
 		        	activeTabs['traffic-sources'] = this.getValue();
-					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+					MODx.gaUpdateSetting('analyticsdashboardwidget.activetabs',Ext.encode(activeTabs),true);
                 }
     		},{
     			xtype: 'checkbox'
-    			,boxLabel: _('analytics.top_content')
+    			,boxLabel: _('analyticsdashboardwidget.top_content')
                 ,hideLabel:true
     			,name: 'showtopcontent'
 		        ,inputValue: 1
 		        ,checked: activeTabs['top-content']
 		        ,handler: function() {
 		        	activeTabs['top-content'] = this.getValue();
-					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+					MODx.gaUpdateSetting('analyticsdashboardwidget.activetabs',Ext.encode(activeTabs),true);
                 }
     		},{
     			xtype: 'checkbox'
-    			,boxLabel: _('analytics.goals')
+    			,boxLabel: _('analyticsdashboardwidget.goals')
                 ,hideLabel:true
     			,name: 'showgoals'
 		        ,inputValue: 1
 		        ,checked: activeTabs['goals']
 		        ,handler: function() {
 		        	activeTabs['goals'] = this.getValue();
-					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+					MODx.gaUpdateSetting('analyticsdashboardwidget.activetabs',Ext.encode(activeTabs),true);
                 }        			        
     		},{
     			xtype: 'checkbox'
-    			,boxLabel: _('analytics.keywords')
+    			,boxLabel: _('analyticsdashboardwidget.keywords')
                 ,hideLabel:true
     			,name: 'showkeywords'
 		        ,inputValue: 1
 		        ,checked: activeTabs['keywords']
 		        ,handler: function() {
 		        	activeTabs['keywords'] = this.getValue();
-					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+					MODx.gaUpdateSetting('analyticsdashboardwidget.activetabs',Ext.encode(activeTabs),true);
                 }        			        
     		},{
     			xtype: 'checkbox'
-    			,boxLabel: _('analytics.site_search')
+    			,boxLabel: _('analyticsdashboardwidget.site_search')
                 ,hideLabel:true
     			,name: 'showsitesearch'
 		        ,inputValue: 1
 		        ,checked: activeTabs['sitesearch']
 		        ,handler: function() {
 		        	activeTabs['sitesearch'] = this.getValue();
-					MODx.gaUpdateSetting('analytics_activetabs',Ext.encode(activeTabs),true);
+					MODx.gaUpdateSetting('analyticsdashboardwidget.activetabs',Ext.encode(activeTabs),true);
                 }        			        
     		}]
         }]
@@ -443,7 +442,7 @@ MODx.combo.GADaysAmount = function(config) {
         })
         ,listeners: {
             select: function(combo, record, index) {
-                MODx.gaUpdateSetting('analytics_days',record.data.days,true);
+                MODx.gaUpdateSetting('analyticsdashboardwidget.days',record.data.days,true);
             }
         }
         ,valueField: 'days'
@@ -478,7 +477,7 @@ MODx.combo.GACacheTime = function(config) {
         })
         ,listeners: {
            select: function(combo, record, index) {
-               MODx.gaUpdateSetting('analytics_cachingtime',record.data.seconds,true);
+               MODx.gaUpdateSetting('analyticsdashboardwidget.cachingtime',record.data.seconds,true);
            }
         }
         ,valueField: 'seconds'
@@ -513,10 +512,10 @@ MODx.combo.GASiteProfiles = function(config) {
         ,editable: false
         ,listeners: {
             select: function(combo, record, index) {
-                 MODx.gaUpdateSetting('analytics_profileId',record.data.profileId);
-                 MODx.gaUpdateSetting('analytics_sitename',record.data.title);
-                 MODx.gaUpdateSetting('analytics_accountId',record.data.accountId);
-                 MODx.gaUpdateSetting('analytics_webPropertyId',record.data.webPropertyId,true);
+                 MODx.gaUpdateSetting('analyticsdashboardwidget.profileId',record.data.profileId);
+                 MODx.gaUpdateSetting('analyticsdashboardwidget.sitename',record.data.title);
+                 MODx.gaUpdateSetting('analyticsdashboardwidget.accountId',record.data.accountId);
+                 MODx.gaUpdateSetting('analyticsdashboardwidget.webPropertyId',record.data.webPropertyId,true);
             }
         }
         ,valueField: 'title'
@@ -535,7 +534,7 @@ Ext.onReady(function() {
 	var tabs = MODx.load({
 	    xtype: 'ga-panel-dashboard-widget'
     });
-    
+
 for(var index in activeTabs) {
   if(activeTabs[index] == false){
   	Ext.getCmp('ga-widget-tabs').remove('ga-tab-'+index);

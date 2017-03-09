@@ -2,10 +2,11 @@
 /**
  * @var modX $modx
  */
+
 /* load the analytics lexicon into the JS lexicon */
 //load class
-$corePath = $modx->getOption('analytics.core_path',null,$modx->getOption('core_path').'components/analytics/');
-require_once $corePath.'model/analytics/analytics.class.php';
+$corePath = $modx->getOption('analyticsdashboardwidget.core_path',null,$modx->getOption('core_path').'components/analyticsdashboardwidget/');
+require_once $corePath.'model/analyticsdashboardwidget/analyticsdashboardwidget.class.php';
 require_once($corePath.'model/google-api-php-client/src/Google/Client.php');
 require_once($corePath.'model/google-api-php-client/src/Google/Service/Analytics.php');
 
@@ -24,28 +25,28 @@ $client->setScopes(array('https://www.googleapis.com/auth/analytics.readonly'));
 $client->setAccessType('offline');
 
 $ga = new GoogleAnalytics($modx);
-$modx->controller->addLexiconTopic('analytics:default');
+$modx->controller->addLexiconTopic('analyticsdashboardwidget:default');
 $modx->regClientStartupHTMLBlock('<script type="text/javascript">var GA = {connector_url:"'.$ga->config['connectorUrl'].'",assets_url:"'.$ga->config['assetsUrl'].'"};</script>');
 
-$sitename = $modx->getOption('analytics_sitename');
+$sitename = $modx->getOption('analyticsdashboardwidget.sitename');
 
 //Get the amount of days
-$days = $modx->getOption('analytics_days',null,7);
+$days = $modx->getOption('analyticsdashboardwidget.days',null,7);
 //Get the settings
 $settings = array(
-    'refreshToken'=> trim($modx->getOption('analytics_refreshToken')),
-    'profileId'=> trim($modx->getOption('analytics_profileId')),
-    'accountId'=> trim($modx->getOption('analytics_accountId')),
-    'webPropertyId'=> trim($modx->getOption('analytics_webPropertyId')),
+    'refreshToken'=> trim($modx->getOption('analyticsdashboardwidget.refreshToken')),
+    'profileId'=> trim($modx->getOption('analyticsdashboardwidget.profileId')),
+    'accountId'=> trim($modx->getOption('analyticsdashboardwidget.accountId')),
+    'webPropertyId'=> trim($modx->getOption('analyticsdashboardwidget.webPropertyId')),
     'start_date' => date('Y-m-d', strtotime('-'.($days-1).' day',time())),
     'end_date' => date('Y-m-d'),
 );
 
 //load lexicon files
 $modx->getService('lexicon','modLexicon');
-$modx->lexicon->load('analytics:default');
+$modx->lexicon->load('analyticsdashboardwidget:default');
 //lexicon to js
-$lexicon = $modx->lexicon->fetch($prefix = 'analytics.',$removePrefix = true);
+$lexicon = $modx->lexicon->fetch($prefix = 'analyticsdashboardwidget.',$removePrefix = true);
 $lexiconJs = $modx->toJSON($lexicon);
 $modx->smarty->assign('_langs', $lexicon);
 
@@ -57,7 +58,7 @@ if((isset($_POST['auth_code'])) && ($_POST['auth_code'] != '')){    // authoriza
 
     $client->setAccessToken($token);                                // set access token
 
-    $Setting = $modx->getObject('modSystemSetting', 'analytics_refreshToken');
+    $Setting = $modx->getObject('modSystemSetting', 'analyticsdashboardwidget.refreshToken');
     $Setting->set('value', trim($refreshToken));
     $Setting->save();
     $settings['refreshToken'] = trim($refreshToken);
@@ -88,17 +89,17 @@ if (!empty($_POST['siteSelect'])) {
 
     //print_r(explode("|", $_POST['siteSelect']));exit;
     /** @var modSystemSetting $setting */
-    $setting = $modx->getObject('modSystemSetting', 'analytics_profileId');
+    $setting = $modx->getObject('modSystemSetting', 'analyticsdashboardwidget.profileId');
     $settings['profileId'] = trim($profileId);
     $setting->set('value', trim($profileId));
     $setting->save();
 
-    $setting = $modx->getObject('modSystemSetting', 'analytics_accountId');
+    $setting = $modx->getObject('modSystemSetting', 'analyticsdashboardwidget.accountId');
     $settings['accountId'] = trim($accountId);
     $setting->set('value', trim($accountId));
     $setting->save();
 
-    $setting = $modx->getObject('modSystemSetting', 'analytics_webPropertyId');
+    $setting = $modx->getObject('modSystemSetting', 'analyticsdashboardwidget.webPropertyId');
     $settings['webPropertyId'] = trim($webPropertyId);
     $setting->set('value', trim($webPropertyId));
     $setting->save();
@@ -117,7 +118,18 @@ if (!empty($_POST['siteSelect'])) {
     //echo '<META HTTP-EQUIV=Refresh CONTENT="1; URL='.$modx->getOption('manager_url').'">';
 }
 
-$client->refreshToken($settings['refreshToken']);   // generate new access token with the refresh token
+try {
+    // Generate new access token with the refresh token
+    $client->refreshToken($settings['refreshToken']);
+} catch (Exception $e) {
+    $modx->smarty->assign('_langs', $lexicon);
+    $modx->smarty->assign('authUrl', $client->createAuthUrl());
+    $modx->smarty->assign('redirect_url', $client->createAuthUrl());
+    $modx->smarty->assign('error', $e->getMessage());
+
+    return $modx->smarty->fetch($ga->config['elementsPath'] . 'tpl/widget.auth.tpl');
+}
+
 $token = $client->getAccessToken();
 $client->setAccessToken($token);
 $gsaCls = new Google_Service_Analytics($client);
@@ -286,15 +298,15 @@ if (empty($analytics)) {
     $analytics['goalnames'] = $goalnames;
     $analytics['goals'] = $goals;
     $analytics['goalstable'] = $goalstable;
-    $analytics['header'] = $modx->getOption('site_name').' - ('.$settings['start_date'].' | '.$settings['end_date'].')';
+    $analytics['header'] = $modx->getOption('analyticsdashboardwidget.sitename').' - ('.$settings['start_date'].' | '.$settings['end_date'].')';
     $analytics['days'] = $days;
 //print_r($analytics);exit;
     //array to cache
-    $modx->cacheManager->set($days.'-analytics',$analytics,$modx->getOption('analytics_cachingtime',null,3600));
+    $modx->cacheManager->set($days.'-analytics',$analytics,$modx->getOption('analyticsdashboardwidget.cachingtime',null,3600));
 
 } else {
 	foreach ($analytics as $k => $analyticsdata) {
 	    $modx->smarty->assign($k, $analyticsdata);
 	}
 }
-return $modx->smarty->fetch($ga->config['elementsPath'].'tpl/widget.analytics.tpl');
+return $modx->smarty->fetch($ga->config['elementsPath'] . 'tpl/widget.analytics.tpl');
