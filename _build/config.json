@@ -3,7 +3,7 @@
   "lowCaseName": "analyticsdashboardwidget",
   "description": "A custom MODX Dashboard Widget that will show data from Google Analytics.",
   "author": "Sterc",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "package":{
     "menus": [],
     "elements": {
