@@ -1,7 +1,7 @@
 Analytics Dashboard widget 1.0.7
 ====================================
 - Fix Google API urls in widget file
-
+- Add system setting for limiting usergroup access to settings inside widget
 
 Analytics Dashboard widget 1.0.6
 ====================================
