@@ -59,4 +59,11 @@ $_lang['analyticsdashboardwidget.value'] = "Value";
 $_lang['analyticsdashboardwidget.title'] = 'Google Analytics - [[++analytics_sitename]]';
 $_lang['analyticsdashboardwidget.auth'] = "Klik hier om toegang te verlenen aan Google";
 $_lang['analyticsdashboardwidget.available_tabs'] = "Actieve tabbladen";
+$_lang['analyticsdashboardwidget.settings_not_available'] = 'Helaas heeft u geen toegang tot de Google Analytics
+ instellingen. Neem aub contact op met een administrator.';
+
+/* System settings */
+$_lang['setting_analyticsdashboardwidget.settings_usergroups'] = 'Usergroups with access to settings page';
+$_lang['setting_analyticsdashboardwidget.settings_usergroups_desc'] = 'Comma-separated list of usergroup-names
+ that have access to the settings panel in de the dashboard widget.';
 

@@ -64,3 +64,10 @@ $_lang['analyticsdashboardwidget.auth_get']	= 'Get your authorization code now';
 $_lang['analyticsdashboardwidget.auth_paste'] = 'Paste your authorization code here';
 $_lang['analyticsdashboardwidget.auth'] = 'Authorize';
 $_lang['analyticsdashboardwidget.available_tabs'] = "Active tabs";
+$_lang['analyticsdashboardwidget.settings_not_available'] = 'Unfortunately you do not have access to the
+ Google Analytics settings. Please contact an administrator.';
+
+/* System settings */
+$_lang['setting_analyticsdashboardwidget.settings_usergroups'] = 'Usergroups with access to settings page';
+$_lang['setting_analyticsdashboardwidget.settings_usergroups_desc'] = 'Comma-separated list of usergroup-names
+ that have access to the settings panel in de the dashboard widget.';

@@ -152,7 +152,8 @@ $modx->smarty->assign('profiles', $profiles);
 
 //check if profile isset
 if (empty($settings['profileId']) || empty($settings['accountId']) || empty($settings['webPropertyId'])){
-    $modx->smarty->assign('managerUrl',$modx->getOption('manager_url'));
+    $modx->smarty->assign('managerUrl', $modx->getOption('manager_url'));
+    $modx->smarty->assign('userPermission', $ga->userSettingsPermission());
     return $modx->smarty->fetch($ga->config['elementsPath'].'tpl/widget.profile.tpl');
 }
 

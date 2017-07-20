@@ -193,4 +193,20 @@ class GoogleAnalytics
         return $protocol . "://" . $_SERVER['HTTP_HOST'] . $port . $_SERVER['REQUEST_URI'];
     }
 
+    public function userSettingsPermission($user = false)
+    {
+        if (!$user) {
+            $user = $this->modx->getUser();
+        }
+        $usergroups = explode(',', $this->modx->getOption('analyticsdashboardwidget.settings_usergroups'));
+        if (!empty($usergroups)) {
+            foreach ($usergroups as $ug) {
+                if ($user->isMember($ug)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
