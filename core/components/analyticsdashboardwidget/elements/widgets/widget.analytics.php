@@ -68,7 +68,7 @@ if((isset($_POST['auth_code'])) && ($_POST['auth_code'] != '')){    // authoriza
     $modx->cacheManager->delete($days.'-analytics');
 
     $modx->cacheManager->deleteTree($modx->getOption('core_path',null,MODX_CORE_PATH).'cache/mgr/smarty/',array(
-       'deleteTop' => false,
+        'deleteTop' => false,
         'skipDirs' => false,
         'extensions' => array('.cache.php','.php'),
     ));
@@ -77,11 +77,11 @@ if((isset($_POST['auth_code'])) && ($_POST['auth_code'] != '')){    // authoriza
 }
 
 if(empty($settings['refreshToken'])){
-	$modx->smarty->assign('_langs', $lexicon);
+    $modx->smarty->assign('_langs', $lexicon);
     $modx->smarty->assign('authUrl',$client->createAuthUrl());
     $modx->smarty->assign('redirect_url',$client->createAuthUrl());
 
-	return $modx->smarty->fetch($ga->config['elementsPath'].'tpl/widget.auth.tpl');
+    return $modx->smarty->fetch($ga->config['elementsPath'].'tpl/widget.auth.tpl');
 }
 
 if (!empty($_POST['siteSelect'])) {
@@ -108,7 +108,7 @@ if (!empty($_POST['siteSelect'])) {
     $modx->cacheManager->delete($days.'-analytics');
 
     $modx->cacheManager->deleteTree($modx->getOption('core_path',null,MODX_CORE_PATH).'cache/mgr/smarty/',array(
-       'deleteTop' => false,
+        'deleteTop' => false,
         'skipDirs' => false,
         'extensions' => array('.cache.php','.php'),
     ));
@@ -152,7 +152,7 @@ $modx->smarty->assign('profiles', $profiles);
 
 //check if profile isset
 if (empty($settings['profileId']) || empty($settings['accountId']) || empty($settings['webPropertyId'])){
-	$modx->smarty->assign('managerUrl',$modx->getOption('manager_url'));
+    $modx->smarty->assign('managerUrl',$modx->getOption('manager_url'));
     return $modx->smarty->fetch($ga->config['elementsPath'].'tpl/widget.profile.tpl');
 }
 
@@ -170,15 +170,15 @@ if (empty($analytics)) {
 
     $topexitpagesxml = $ga->callApi($client->getAccessToken(), 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A'.$settings['profileId'].'&start-date='.$settings['start_date'].'&end-date='.$settings['end_date'].'&dimensions=ga%3ApagePath&metrics=ga%3Aexits%2Cga%3Apageviews%2Cga%3AexitRate&sort=-ga:exits');
 
-    $keywordsxml = $ga->callApi($client->getAccessToken(), 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A'.$settings['profileId'].'&start-date='.$settings['start_date'].'&end-date='.$settings['end_date'].'&dimensions=ga%3Akeyword&metrics=ga%3Avisits%2Cga%3ApageviewsPerVisit%2Cga%3AavgTimeOnSite%2Cga%3ApercentNewVisits%2Cga%3AvisitBounceRate&sort=-ga:visits');
+    $keywordsxml = $ga->callApi($client->getAccessToken(), 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A'.$settings['profileId'].'&start-date='.$settings['start_date'].'&end-date='.$settings['end_date'].'&dimensions=ga%3Akeyword&metrics=ga%3Avisits%2Cga%3ApageviewsPerVisit%2Cga%3AavgSessionDuration%2Cga%3ApercentNewVisits%2Cga%3AvisitBounceRate&sort=-ga:visits');
 
     $sitesearchxml = $ga->callApi($client->getAccessToken(), 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A'.$settings['profileId'].'&start-date='.$settings['start_date'].'&end-date='.$settings['end_date'].'&dimensions=ga%3AsearchKeyword&metrics=ga%3AsearchUniques%2Cga%3AsearchResultViews%2Cga%3AsearchExitRate%2Cga%3AsearchDuration%2Cga%3AsearchDepth&sort=-ga:searchUniques');
 
-    $trafficsourcesxml = $ga->callApi($client->getAccessToken(), 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A'.$settings['profileId'].'&start-date='.$settings['start_date'].'&end-date='.$settings['end_date'].'&dimensions=ga%3Asource&metrics=ga%3Avisits%2Cga%3Avisitors%2Cga%3ApageviewsPerVisit%2Cga%3AavgTimeOnSite%2Cga%3ApercentNewVisits%2Cga%3AvisitBounceRate&sort=-ga:visits');
+    $trafficsourcesxml = $ga->callApi($client->getAccessToken(), 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A'.$settings['profileId'].'&start-date='.$settings['start_date'].'&end-date='.$settings['end_date'].'&dimensions=ga%3Asource&metrics=ga%3Avisits%2Cga%3Avisitors%2Cga%3ApageviewsPerVisit%2Cga%3AavgSessionDuration%2Cga%3ApercentNewVisits%2Cga%3AvisitBounceRate&sort=-ga:visits');
 
-    $generalxml = $ga->callApi($client->getAccessToken(), 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A'.$settings['profileId'].'&start-date='.$settings['start_date'].'&end-date='.$settings['end_date'].'&dimensions=ga%3Ayear&metrics=ga%3Avisits%2Cga%3Avisitors%2Cga%3Apageviews%2Cga%3ApageviewsPerVisit%2Cga%3AavgTimeOnSite%2Cga%3ApercentNewVisits%2Cga%3AvisitBounceRate&sort=-ga:visits');
+    $generalxml = $ga->callApi($client->getAccessToken(), 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A'.$settings['profileId'].'&start-date='.$settings['start_date'].'&end-date='.$settings['end_date'].'&dimensions=ga%3Ayear&metrics=ga%3Avisits%2Cga%3Avisitors%2Cga%3Apageviews%2Cga%3ApageviewsPerVisit%2Cga%3AavgSessionDuration%2Cga%3ApercentNewVisits%2Cga%3AvisitBounceRate&sort=-ga:visits');
 
-    $visitscharxml = $ga->callApi($client->getAccessToken(), 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A'.$settings['profileId'].'&start-date='.$settings['start_date'].'&end-date='.$settings['end_date'].'&dimensions=ga%3Adate&metrics=ga%3Avisits%2Cga%3Avisitors%2Cga%3Apageviews%2Cga%3ApageviewsPerVisit%2Cga%3AavgTimeOnSite%2Cga%3ApercentNewVisits%2Cga%3AvisitBounceRate&sort=ga:date');
+    $visitscharxml = $ga->callApi($client->getAccessToken(), 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A'.$settings['profileId'].'&start-date='.$settings['start_date'].'&end-date='.$settings['end_date'].'&dimensions=ga%3Adate&metrics=ga%3Avisits%2Cga%3Avisitors%2Cga%3Apageviews%2Cga%3ApageviewsPerVisit%2Cga%3AavgSessionDuration%2Cga%3ApercentNewVisits%2Cga%3AvisitBounceRate&sort=ga:date');
 
     $devicescharxml = $ga->callApi($client->getAccessToken(), 'https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A'.$settings['profileId'].'&start-date='.$settings['start_date'].'&end-date='.$settings['end_date'].'&dimensions=ga%3AoperatingSystem&metrics=ga%3Avisits&sort=ga:visits');
 
@@ -205,7 +205,7 @@ if (empty($analytics)) {
 
 
     //generate the goals api call
-    foreach($goalnames as $goalname){
+    foreach ($goalnames as $goalname){
         $goalMetrics .= 'ga%3Agoal'.$goalname['id'].'Completions%2C';
     }
     $goalMetrics .= 'ga%3AgoalCompletionsAll';
@@ -219,38 +219,40 @@ if (empty($analytics)) {
 
     //Make new array for goals
     $goalstable = array();
-//print_r($goals);
+    //print_r($goals);
     $gi = 0;
     foreach($goalnames as $goalname){
         $goalstable[$gi]['completions'] += $goals['totalsForAllResults']['ga:goal'.$goalname['id'].'Completions'];
         $goalstable[$gi]['goalname'] = $goalname['goalname'];
         $gi++;
-       // $general[0]['allGoals'] += (int)$goal['oalCompletionsAll'];
+        // $general[0]['allGoals'] += (int)$goal['oalCompletionsAll'];
     }
     //print_r($trafficsourceschar);exit;
     //Make new array for the pie chart
-	foreach($trafficsourceschar['rows'] as $trafficsourc){
-		if($trafficsourc[0] == 'google' || $trafficsourc[0] == 'search' || $trafficsourc[0] == 'bing' || $trafficsourc[0] == 'yahoo'){
-			$trafficsourcessearch += $trafficsourc[1];
-		}
-		elseif($trafficsourc[0] == '(direct)'){
-			$trafficsourcesdirect += $trafficsourc[1];
-		}
-		else{
-			$trafficsourcesreffered += $trafficsourc[1];
-		}
-	}
+    foreach ($trafficsourceschar['rows'] as $trafficsourc) {
+        if ($trafficsourc[0] == 'google' ||
+            $trafficsourc[0] == 'search' ||
+            $trafficsourc[0] == 'bing' ||
+            $trafficsourc[0] == 'yahoo'
+        ) {
+            $trafficsourcessearch += $trafficsourc[1];
+        } elseif ($trafficsourc[0] == '(direct)') {
+            $trafficsourcesdirect += $trafficsourc[1];
+        } else {
+            $trafficsourcesreffered += $trafficsourc[1];
+        }
+    }
 
-	$trafficsourceschararr = array();
-	//$trafficsourceschararr[0]['name'] = 'Search Engines ('.round((100/$general[0]['visits'])*$trafficsourcessearch,2).'%)';
-	$trafficsourceschararr[0]['name'] = 'Search Engines';
-	$trafficsourceschararr[0]['visits'] = $trafficsourcessearch;
-	//$trafficsourceschararr[1]['name'] = 'Direct Traffic ('.round((100/$general[0]['visits'])*$trafficsourcesdirect,2).'%)';
-	$trafficsourceschararr[1]['name'] = 'Direct Traffic';
-	$trafficsourceschararr[1]['visits'] = $trafficsourcesdirect;
-	///$trafficsourceschararr[2]['name'] = 'Referring Sites ('.round((100/$general[0]['visits'])*$trafficsourcesreffered,2).'%)';
-	$trafficsourceschararr[2]['name'] = 'Referring Sites';
-	$trafficsourceschararr[2]['visits'] = $trafficsourcesreffered;
+    $trafficsourceschararr = array();
+    //$trafficsourceschararr[0]['name'] = 'Search Engines ('.round((100/$general[0]['visits'])*$trafficsourcessearch,2).'%)';
+    $trafficsourceschararr[0]['name'] = 'Search Engines';
+    $trafficsourceschararr[0]['visits'] = $trafficsourcessearch;
+    //$trafficsourceschararr[1]['name'] = 'Direct Traffic ('.round((100/$general[0]['visits'])*$trafficsourcesdirect,2).'%)';
+    $trafficsourceschararr[1]['name'] = 'Direct Traffic';
+    $trafficsourceschararr[1]['visits'] = $trafficsourcesdirect;
+    ///$trafficsourceschararr[2]['name'] = 'Referring Sites ('.round((100/$general[0]['visits'])*$trafficsourcesreffered,2).'%)';
+    $trafficsourceschararr[2]['name'] = 'Referring Sites';
+    $trafficsourceschararr[2]['visits'] = $trafficsourcesreffered;
 
     //change the name of the devices array key field
     foreach($deviceschar as $device){
@@ -300,13 +302,13 @@ if (empty($analytics)) {
     $analytics['goalstable'] = $goalstable;
     $analytics['header'] = $modx->getOption('analyticsdashboardwidget.sitename').' - ('.$settings['start_date'].' | '.$settings['end_date'].')';
     $analytics['days'] = $days;
-//print_r($analytics);exit;
+    //print_r($analytics);exit;
     //array to cache
     $modx->cacheManager->set($days.'-analytics',$analytics,$modx->getOption('analyticsdashboardwidget.cachingtime',null,3600));
 
 } else {
-	foreach ($analytics as $k => $analyticsdata) {
-	    $modx->smarty->assign($k, $analyticsdata);
-	}
+    foreach ($analytics as $k => $analyticsdata) {
+        $modx->smarty->assign($k, $analyticsdata);
+    }
 }
 return $modx->smarty->fetch($ga->config['elementsPath'] . 'tpl/widget.analytics.tpl');
