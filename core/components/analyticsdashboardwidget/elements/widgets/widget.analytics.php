@@ -26,7 +26,15 @@ $client->setAccessType('offline');
 
 $ga = new GoogleAnalytics($modx);
 $modx->controller->addLexiconTopic('analyticsdashboardwidget:default');
-$modx->regClientStartupHTMLBlock('<script type="text/javascript">var GA = {connector_url:"'.$ga->config['connectorUrl'].'",assets_url:"'.$ga->config['assetsUrl'].'"};</script>');
+$modx->regClientStartupHTMLBlock('
+    <script type="text/javascript">
+        var GA = {
+            connector_url:"'.$ga->config['connectorUrl'].'",
+            assets_url:"'.$ga->config['assetsUrl'].'",
+            userSettingsPermission:"'.$ga->userSettingsPermission().'"
+        };
+    </script>
+ ');
 
 $sitename = $modx->getOption('analyticsdashboardwidget.sitename');
 
@@ -39,7 +47,7 @@ $settings = array(
     'accountId'=> trim($modx->getOption('analyticsdashboardwidget.accountId')),
     'webPropertyId'=> trim($modx->getOption('analyticsdashboardwidget.webPropertyId')),
     'start_date' => date('Y-m-d', strtotime('-'.($days-1).' day',time())),
-    'end_date' => date('Y-m-d'),
+    'end_date' => date('Y-m-d')
 );
 
 //load lexicon files
@@ -145,9 +153,7 @@ try {
 
     return $modx->smarty->fetch($ga->config['elementsPath'].'tpl/widget.auth.tpl');
 }
-//print_r($accounts);
 $profiles = $ga->parseAccountList($accounts);
-//print_r($profiles);exit;
 $modx->smarty->assign('profiles', $profiles);
 
 //check if profile isset
@@ -292,7 +298,11 @@ if (empty($analytics)) {
     $analytics['general'] = $general[0];
     $analytics['visitsarr'] = $visits;
     $analytics['visits'] = $visits;
-    $analytics['profiles'] = $profiles;
+    if ($ga->userSettingsPermission()) {
+        $analytics['profiles'] = $profiles;
+    } else {
+        $analytics['profiles'] = '';
+    }
     $analytics['trafficsourceschararr'] = $trafficsourceschararr;
     $analytics['devices'] = $deviceschar;
     $analytics['mobile'] = $mobilechar;

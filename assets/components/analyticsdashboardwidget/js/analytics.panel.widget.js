@@ -271,6 +271,7 @@ MODx.panel.GATabSettings = function(config) {
 		    xtype: 'ga-combo-site-profile'
 		    ,fieldLabel: _('analyticsdashboardwidget.select_profile')
 		    ,value: MODx.config['analyticsdashboardwidget.sitename']
+            ,hidden: !GA.userSettingsPermission
 		},{
             xtype: 'panel'
             ,border: false
