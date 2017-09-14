@@ -1,0 +1,202 @@
+#modx-action-buttons .x-btn-branding {
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    color: #555555 !important;
+}
+
+.x-combo-list-header {
+    color: #555555;
+    font-weight: bold;
+    padding: 5px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.x-combo-list-group .x-combo-list-item {
+    padding-left: 15px;
+}
+
+.google-analytics-description {
+    overflow: hidden;
+}
+
+.google-analytics-description p {
+    margin: 0 35% 0 0;
+}
+
+.google-analytics-description .google-analytics-summary {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 25%;
+    padding: 30px;
+    background: #ffffff url('../../images/logo.png') no-repeat center center;
+    text-align: right;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Realtime */
+
+.google-analytics-description .google-analytics-summary #google-analytics-realtime {
+    position: absolute;
+    top: 40%;
+    right: 30px;
+    left: 30px;
+    height: 54px;
+    background: #ffffff;
+    margin: -27px 0 0;
+    text-align: left;
+}
+
+.google-analytics-description .google-analytics-summary #google-analytics-realtime span {
+    display: inline;
+}
+
+.google-analytics-description .google-analytics-summary #google-analytics-realtime .google-analytics-realtime-amount {
+    font-size: 54px;
+    line-height: 54px;
+    font-weight: bold;
+    margin: 0 5px 0 0;
+}
+
+.google-analytics-description .google-analytics-summary .google-analytics-data {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    margin: -20px 0 0;
+}
+
+.google-analytics-description .google-analytics-summary .google-analytics-data strong,
+.google-analytics-description .google-analytics-summary .google-analytics-data span {
+    display: block;
+}
+
+/* Percent */
+
+.google-analytics-percent {
+    width: 100%;
+}
+
+.google-analytics-percent .google-analytics-percent-wrapper {
+    display: block;
+    padding: 0 42px 0 0;
+}
+
+.google-analytics-percent .google-analytics-percent-wrapper .google-analytics-percent-bar {
+    display: inline;
+    float: left;
+    height: 15px;
+    min-width: 1px;
+    margin: 0 10px 0 0;
+    background: #058dc7;
+}
+
+/* Meta */
+
+.google-analytics-metas table {
+    width: 100%;
+    margin: 20px 0 0;
+    border-collapse: collapse;
+}
+
+.google-analytics-metas table td {
+    padding: 5px;
+    color: #888888;
+    font-size: 10px;
+    font-weight: bold;
+    border: 1px solid #e4e4e4;
+}
+
+.google-analytics-metas table td .google-analytics-meta {
+    position: relative;
+    display: block;
+    padding: 10px;
+}
+
+.google-analytics-metas table td .google-analytics-meta .google-analytics-meta-value {
+    display: block;
+    color: #666666;
+    font-size: 35px;
+    line-height: 35px;
+}
+
+.google-analytics-metas table td .google-analytics-meta .google-analytics-meta-label {
+    display: block;
+    text-transform: uppercase;
+}
+
+.google-analytics-metas table td .google-analytics-meta .google-analytics-meta-progress {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: block;
+    width: 30px;
+}
+
+.google-analytics-metas table td .google-analytics-meta .google-analytics-meta-progress .icon {
+    display: block;
+    width: 30px;
+    text-align: center;
+    font-size: 35px;
+    line-height: 35px;
+}
+
+.google-analytics-metas table td .google-analytics-meta .google-analytics-meta-progress span {
+    display: block;
+    width: 30px;
+    text-align: center;
+    margin: -5px 0 0;
+}
+
+/* Dashboard */
+
+.dashboard-google-analytics .body {
+    height: 255px;
+}
+
+.dashboard-google-analytics #google-analytics-realtime {
+    text-align: center;
+    padding: 25px 0;
+}
+
+.dashboard-google-analytics #google-analytics-realtime .google-analytics-realtime-amount {
+    display: block;
+    font-size: 54px;
+    line-height: 54px;
+    text-align: center;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.dashboard-google-analytics #google-analytics-realtime .google-analytics-realtime-description {
+    display: block;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.list-decimal {
+    list-style: decimal;
+    padding-left: 15px;
+}
+
+.google-analytics-chart-loading:after {
+    content: " ";
+    display: block;
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3697cd; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

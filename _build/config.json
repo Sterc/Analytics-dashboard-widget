@@ -1,0 +1,90 @@
+{
+    "name": "Google Analytics",
+    "lowCaseName": "googleanalytics",
+    "description": "",
+    "author": "Oene Tjeerd de Bruin (Sterc)",
+    "version": "2.0.0",
+    "package":{
+      "actions": [{
+        "id": 1,
+        "controller": "index",
+        "hasLayout": 1,
+        "langTopics": "googleanalytics:default",
+        "assets": ""
+        }],
+      "menus": [{
+        "text": "googleanalytics",
+        "description": "googleanalytics.menu_desc",
+        "action": 1,
+        "parent": "components",
+        "icon": "",
+        "menuIndex": 0,
+        "params": "",
+        "handler": ""
+      }],
+      "systemSettings": [{
+        "key": "branding_url",
+        "type": "textfield",
+        "area": "Google Analytics",
+        "value": "http://www.sterc.com"
+      }, {
+        "key": "branding_url_help",
+        "type": "textfield",
+        "area": "Google Analytics",
+        "value": "//www.sterc.com/extras/googleanalytics"
+      }, {
+        "key": "account",
+        "type": "textfield",
+        "area": "Google Analytics",
+        "value": ""
+      }, {
+        "key": "api_useragent",
+        "type": "textfield",
+        "area": "Google Analytics",
+        "value": "GoogleAnalyticsOAuth v2.0.0"
+      }, {
+        "key": "client_id",
+        "type": "textfield",
+        "area": "Google Analytics",
+        "value": ""
+      }, {
+        "key": "client_secret",
+        "type": "textfield",
+        "area": "Google Analytics",
+        "value": ""
+      }, {
+        "key": "history",
+        "type": "textfield",
+        "area": "Google Analytics",
+        "value": "14"
+      }, {
+        "key": "panels",
+        "type": "textfield",
+        "area": "Google Analytics",
+        "value": "summary,visitors,sources,content,content_search,goals"
+      }, {
+        "key": "refresh_token",
+        "type": "textfield",
+        "area": "Google Analytics",
+        "value": ""
+      }, {
+        "key": "user_name",
+        "type": "textfield",
+        "area": "Sterc Extra",
+        "value": ""
+      }, {
+        "key": "user_email",
+        "type": "textfield",
+        "area": "Sterc Extra",
+        "value": ""
+      }]
+    }
+    ,"build":{
+        "resolver": {
+            "after": ["setupoptions.resolver.php", "stercextra.resolver.php"]
+        },
+        "setupOptions":{
+            "source": "setup.options.php"
+        }
+    }
+}

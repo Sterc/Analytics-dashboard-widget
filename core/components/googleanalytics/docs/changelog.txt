@@ -1,0 +1,37 @@
+----------------------
+Google Analytics
+----------------------
+
+----------------------
+Version: 2.0.0-pl
+Released: 2017-09-13
+----------------------
+- Google Analytics Dashboard Widget can now be found under Extras > Google Analytics.
+- Convert flash charts to html charts.
+- Add widget that shows realtime visitors.
+- Add widget that shows visitors and pageviews data.
+- Add latest Google API changes.
+- Add goals.
+- Some bugfixes.
+
+----------------------
+Version: 1.1.0-pl
+Released: 2015-09-17
+----------------------
+- Bugfixes
+- New Google Auth
+- New Real Time Visitors function
+- Complete rebuild
+	- New ExtJS and PHP code
+
+----------------------
+Version: 1.0.1-pl
+Released: 2015-03-10
+----------------------
+- 404 Pages reporting
+
+----------------------
+Version: 1.0.0-pl
+Released: 2014-09-25
+----------------------
+- First release
