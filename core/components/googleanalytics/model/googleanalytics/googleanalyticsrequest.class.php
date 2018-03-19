@@ -136,7 +136,6 @@
                     'refresh_token' 	=> $this->modx->getOption('googleanalytics.refresh_token', null, ''),
                     'client_id' 		=> $this->getApiKey(),
                     'client_secret' 	=> $this->getApiSecret(),
-                    'redirect_uri'		=> GoogleAnalyticsRequest::API_OAUTH_REDIRECT_URL,
                     'grant_type'		=> 'refresh_token'
                 );
 
@@ -655,7 +654,7 @@
 	        if (!isset($info['http_code']) || '200' != $info['http_code']) {
 				return false;
 			}
-	        
+
 	        curl_close($curl);
 	        
 	        return $this->modx->fromJSON($response);
