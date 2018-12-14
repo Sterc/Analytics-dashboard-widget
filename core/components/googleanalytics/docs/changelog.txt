@@ -3,6 +3,12 @@ Google Analytics
 ----------------------
 
 ----------------------
+Version: 2.0.1-pl
+Released: 2018-12-14
+----------------------
+- Widgets are installed via resolver
+
+----------------------
 Version: 2.0.0-pl
 Released: 2017-09-13
 ----------------------

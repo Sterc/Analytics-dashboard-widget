@@ -37,27 +37,6 @@ $permissions = array(
     )
 );
 
-/** @var $widgets */
-$widgets = array(
-    array(
-        'name'        => 'googleanalytics.widget_visitors',
-        'description' => 'googleanalytics.widget_visitors_desc',
-        'type'        => 'file',
-        'content'     => '[[++core_path]]components/googleanalytics/elements/widgets/visitors.widget.php',
-        'namespace'   => 'googleanalytics',
-        'lexicon'     => 'googleanalytics:default',
-        'size'        => 'half'
-    ),
-    array(
-        'name'        => 'googleanalytics.widget_realtime',
-        'description' => 'googleanalytics.widget_realtime_desc',
-        'type'        => 'file',
-        'content'     => '[[++core_path]]components/googleanalytics/elements/widgets/realtime.widget.php',
-        'namespace'   => 'googleanalytics',
-        'lexicon'     => 'googleanalytics:default',
-        'size'        => 'half'
-    )
-);
 
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
@@ -89,15 +68,6 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             );
             if ($settingObject) {
                 $settings[$key]['value'] = $settingObject->get('value');
-            }
-        }
-
-        foreach ($widgets as $widget) {
-            $widgetObject = $modx->getObject('modDashboardWidget', array('name' => $widget['name']));
-            if (!$widgetObject) {
-                $widgetObject = $modx->newObject('modDashboardWidget');
-                $widgetObject->fromArray($widget);
-                $widgetObject->save();
             }
         }
         break;

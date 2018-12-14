@@ -3,7 +3,7 @@
     "lowCaseName": "googleanalytics",
     "description": "",
     "author": "Oene Tjeerd de Bruin (Sterc)",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "package":{
       "actions": [{
         "id": 1,
@@ -81,7 +81,11 @@
     }
     ,"build":{
         "resolver": {
-            "after": ["setupoptions.resolver.php", "stercextra.resolver.php"]
+            "after": [
+              "setupoptions.resolver.php",
+              "widget.resolver.php",
+              "stercextra.resolver.php"
+            ]
         },
         "setupOptions":{
             "source": "setup.options.php"
