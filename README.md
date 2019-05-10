@@ -1,6 +1,6 @@
 Google Analytics Dashboard for MODX
 ==========================
-Current version: 2.0.0-pl
+Current version: 2.0.1-pl
 
 Author: Sterc <modx@sterc.nl>
 
@@ -18,20 +18,57 @@ Features
 Installation
 --------------------
 
-For usage of the Google Analytics Dashboard Google Analytics Api credentials are required.
-They can be generated at this page https://console.cloud.google.com.
+**Steps at Google**
 
-If you have an previous installation of the Google Analytics Dashboard Widget:
-- Remove current widgets from dashboards & delete widget from the widget list
+For usage of the Google Analytics Dashboard Google Analytics API credentials are required.
+Log in to your Google Account to which your Analytics are linked.
 
-- Download or update the Google analytics Dashboard. 
-- Install the new Google Analytics Dashboard 2.*.*
-- Uninstall and remove the Google Analytics Dashboard Widget 1.*.* from package management.
-- Navigate to System Settings and search for "googleanalytics.client". Enter your Google Analytics API Client ID and API Key.
-- Go to the Google Analytics CMP and click on authorize in the top right corner.
-- Click the "Authorize" button on the top right to get an authorization code and authorize access to your analytics.
-- Click the "Settings" button and select your account, property and profile where to fetch the data from.
-- Costumize the view settings on the right and save the settings, data will be shown now in the Google Analytics CMP.
-- Go to Dashboards and place Analytics realtime and Analytics visitors on the dashboard of choice.
+They can be generated at this page [https://console.cloud.google.com/apis/library](https://console.cloud.google.com/apis/library).
+
+Search for 'Analytics API' in the library. Click on 'Analytics API'.
+On the next page you could choose for 'Enable'.
+
+Go to Credentials. Choose for Create credentials >  OAuth client ID.
+- Application type: other.
+- Enter a name and click on 'Create'.
+
+Copy the 'Client ID' and a 'Client secret' to the system settings in MODX.
+
+
+**System settings**
+The following system settings are required for further setup. Go the system settings > Select the namespace 'googleanalytics'.
+- `googleanalytics.client_id` (Client ID)
+- `googleanalytics.client_secret` (Client secret)
+
+
+**Extra**
+Go to Extras > Google Analytics. Click on the button 'Authorize'.
+
+Click on 'Get authorization token'. Select your Google account which is used for Analytics.
+Read about the permissions, click on 'Allow' if you agree with them.
+
+Copy the code to Authorization token field in MODX. Click on 'Authorize'.
+
+A new button 'Settings' will be available. Click on 'Settings'.
+
+*Settings*
+In this modal you should select your:
+- Google Analytics account
+- Google Analytics property
+- Google Analytics profile
+
+Click on 'Save'.
+
+Google Analytics is now successfully connected to the Google Analytics Dashboard.
+
+Go to Dashboards and place Analytics realtime and Analytics visitors on the dashboard of choice.
 
 That's it, all done!
+
+
+_What should I do with previous installations of the Google Analytics Dashboard?_
+
+- Remove current widgets from dashboards & delete widget from the widget list
+- Download or update the Google Analytics Dashboard.
+- Install the new Google Analytics Dashboard 2.*.*
+- Uninstall and remove the Google Analytics Dashboard Widget 1.*.* from package management.
