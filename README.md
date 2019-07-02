@@ -72,3 +72,8 @@ _What should I do with previous installations of the Google Analytics Dashboard?
 - Download or update the Google Analytics Dashboard.
 - Install the new Google Analytics Dashboard 2.*.*
 - Uninstall and remove the Google Analytics Dashboard Widget 1.*.* from package management.
+
+# Free Extra
+This is a free extra and the code is publicly available for you to change. The extra is being actively maintained and you're free to put in pull requests which match our roadmap. Please create an issue if the pull request differs from the roadmap so we can make sure we're on the same page.
+
+Need help? [Approach our support desk for paid premium support.](mailto:service@sterc.com)
