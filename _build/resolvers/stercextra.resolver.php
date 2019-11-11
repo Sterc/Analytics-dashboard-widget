@@ -1,5 +1,12 @@
 <?php
-$package = 'googleanalytics';
+
+/**
+ * Google Analytics
+ *
+ * Copyright 2019 by Oene Tjeerd de Bruin <oenetjeerd@sterc.nl>
+ */
+
+$package = 'GoogleAnalytics';
 $url     = 'https://extras.sterc.nl/api/v1/packagedata';
 $params  = array();
 
@@ -7,8 +14,8 @@ $modx =& $object->xpdo;
 $c = $modx->newQuery('transport.modTransportPackage');
 $c->where(
     array(
-          'workspace' => 1,
-          "(SELECT
+        'workspace' => 1,
+        "(SELECT
             `signature`
             FROM {$modx->getTableName('modTransportPackage')} AS `latestPackage`
             WHERE `latestPackage`.`package_name` = `modTransportPackage`.`package_name`
@@ -24,7 +31,7 @@ $c->where(
 $c->where(
     array(
         array(
-            'modTransportPackage.package_name' => $package
+            'modTransportPackage.package_name' => strtolower($package)
         ),
         'installed:IS NOT' => null
     )
@@ -46,18 +53,18 @@ if ($options['topic']) {
     $topic     = trim($options['topic'], '/');
     $topic     = explode('/', $topic);
     $signature = end($topic);
-    $version   = str_replace($package . '-', '', $signature);
+    $version   = str_replace(strtolower($package) . '-', '', $signature);
 }
 
 $userNameObj = $modx->getObject(
     'modSystemSetting',
-    array('key' => $package . '.user_name')
+    array('key' => strtolower($package) . '.user_name')
 );
 $userName = ($userNameObj) ? $userNameObj->get('value') : '';
 
 $userEmailObj = $modx->getObject(
     'modSystemSetting',
-    array('key' => $package . '.user_email')
+    array('key' => strtolower($package) . '.user_email')
 );
 $userEmail = ($userEmailObj) ? $userEmailObj->get('value') : '';
 
@@ -79,7 +86,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $version          = $oldVersion;
         $setupOptionsPath = explode('/', $options['setup-options']);
         $signature        = $setupOptionsPath[0];
-        $oldVersion       = str_replace($package . '-', '', $signature);
+        $oldVersion       = str_replace(strtolower($package) . '-', '', $signature);
 
         break;
 }

@@ -1,3 +1,17 @@
+/* Should be moved to default theme. */
+.x-menu-item-icon {
+    left: 7px !important;
+    font-size: 14px !important;
+    line-height: 16px !important;
+    text-align: center !important;
+}
+
+/* Should be moved to default theme. */
+.x-btn-text .icon,
+.x-tab-strip-text .icon {
+    margin-right: 8px;
+}
+
 #modx-action-buttons .x-btn-branding {
     background: none !important;
     box-shadow: none !important;
@@ -5,93 +19,17 @@
     color: #555555 !important;
 }
 
-.x-combo-list-header {
-    color: #555555;
-    font-weight: bold;
-    padding: 5px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+.x-list-decimal {
+    list-style-type: decimal;
+    padding: 0 0 0 15px;
 }
 
-.x-combo-list-group .x-combo-list-item {
-    padding-left: 15px;
+.x-list-decimal li {
+    margin: 0 0 5px;
 }
 
-.google-analytics-description {
-    overflow: hidden;
-}
-
-.google-analytics-description p {
-    margin: 0 35% 0 0;
-}
-
-.google-analytics-description .google-analytics-summary {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 25%;
-    padding: 30px;
-    background: #ffffff url('../../images/logo.png') no-repeat center center;
-    text-align: right;
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Realtime */
-
-.google-analytics-description .google-analytics-summary #google-analytics-realtime {
-    position: absolute;
-    top: 40%;
-    right: 30px;
-    left: 30px;
-    height: 54px;
-    background: #ffffff;
-    margin: -27px 0 0;
-    text-align: left;
-}
-
-.google-analytics-description .google-analytics-summary #google-analytics-realtime span {
-    display: inline;
-}
-
-.google-analytics-description .google-analytics-summary #google-analytics-realtime .google-analytics-realtime-amount {
-    font-size: 54px;
-    line-height: 54px;
-    font-weight: bold;
-    margin: 0 5px 0 0;
-}
-
-.google-analytics-description .google-analytics-summary .google-analytics-data {
-    position: absolute;
-    top: 50%;
-    right: 30px;
-    margin: -20px 0 0;
-}
-
-.google-analytics-description .google-analytics-summary .google-analytics-data strong,
-.google-analytics-description .google-analytics-summary .google-analytics-data span {
-    display: block;
-}
-
-/* Percent */
-
-.google-analytics-percent {
-    width: 100%;
-}
-
-.google-analytics-percent .google-analytics-percent-wrapper {
-    display: block;
-    padding: 0 42px 0 0;
-}
-
-.google-analytics-percent .google-analytics-percent-wrapper .google-analytics-percent-bar {
-    display: inline;
-    float: left;
-    height: 15px;
-    min-width: 1px;
-    margin: 0 10px 0 0;
-    background: #058dc7;
+.x-window .panel-desc {
+    margin-top: 15px;
 }
 
 /* Meta */
@@ -151,6 +89,100 @@
     margin: -5px 0 0;
 }
 
+/* Summary */
+
+.googleanalytics-summary {
+
+}
+
+.googleanalytics-summary > .x-panel-bwrap {
+    padding: 15px;
+    margin: -15px -16px -15px 0;
+    background: #fff !important;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.googleanalytics-summary .googleanalytics-summary-total {
+    display: block;
+    font-size: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.googleanalytics-summary .googleanalytics-summary-visitors {
+    display: block;
+    text-align: center;
+}
+
+.googleanalytics-summary .googleanalytics-summary-url {
+    display: block;
+    text-align: right;
+    font-weight: 600;
+}
+
+.googleanalytics-summary-ua {
+    display: block;
+    text-align: right;
+}
+
+/* Realtime */
+
+.google-analytics-description .google-analytics-summary #google-analytics-realtime {
+    position: absolute;
+    top: 40%;
+    right: 30px;
+    left: 30px;
+    height: 54px;
+    background: #ffffff;
+    margin: -27px 0 0;
+    text-align: left;
+}
+
+.google-analytics-description .google-analytics-summary #google-analytics-realtime span {
+    display: inline;
+}
+
+.google-analytics-description .google-analytics-summary #google-analytics-realtime .google-analytics-realtime-amount {
+    font-size: 54px;
+    line-height: 54px;
+    font-weight: bold;
+    margin: 0 5px 0 0;
+}
+
+.google-analytics-description .google-analytics-summary .google-analytics-data {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    margin: -20px 0 0;
+}
+
+.google-analytics-description .google-analytics-summary .google-analytics-data strong,
+.google-analytics-description .google-analytics-summary .google-analytics-data span {
+    display: block;
+}
+
+/* Percent */
+
+.google-analytics-percent {
+    width: 100%;
+}
+
+.google-analytics-percent .google-analytics-percent-wrapper {
+    display: block;
+    padding: 0 42px 0 0;
+}
+
+.google-analytics-percent .google-analytics-percent-wrapper .google-analytics-percent-bar {
+    display: inline;
+    float: left;
+    height: 12px;
+    min-width: 1px;
+    margin: 0 10px 0 0;
+    background-color: #32AB9A;
+    background-image: linear-gradient(#32AB9A, #00948E);
+    border-radius: 3px;
+}
+
 /* Dashboard */
 
 .dashboard-google-analytics .body {
@@ -158,6 +190,7 @@
 }
 
 .dashboard-google-analytics #google-analytics-realtime {
+    height: 150px;
     text-align: center;
     padding: 25px 0;
 }
@@ -177,23 +210,25 @@
     line-height: 30px;
 }
 
-.list-decimal {
-    list-style: decimal;
-    padding-left: 15px;
+/* Chart */
+
+.google-analytics-chart-loading {
+    min-height: 200px;
 }
 
 .google-analytics-chart-loading:after {
-    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 50%;
     display: block;
-    border: 8px solid #f3f3f3; /* Light grey */
-    border-top: 8px solid #3697cd; /* Blue */
-    border-radius: 50%;
     width: 60px;
     height: 60px;
+    content: " ";
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3697cd;
+    border-radius: 50%;
     animation: spin 2s linear infinite;
-    position: absolute;
-    left: 50%;
-    top: 30%;
+    margin: -30px 0 0 -30px;
 }
 
 @keyframes spin {

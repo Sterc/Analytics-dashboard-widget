@@ -1,27 +1,25 @@
 GoogleAnalytics.panel.Access = function(config) {
-	config = config || {};
+    config = config || {};
 
     Ext.apply(config, {
-        id			: 'googleanalytics-panel-access',
-        cls			: 'container',
-        items		: [{
-            html		: '<h2>'+_('googleanalytics')+'</h2>',
-            id			: 'googleanalytics-header',
-            cls			: 'modx-page-header'
+        id          : 'googleanalytics-panel-access',
+        cls         : 'container',
+        items       : [{
+            html        : '<h2>' + _('googleanalytics.no_oauth_title') + '</h2>',
+            cls         : 'modx-page-header'
         }, {
-        	layout		: 'form',
-            items		: [{
-            	html         : '<div class="google-analytics-summary"></div><p>' + _('googleanalytics.stats_desc') + '</p>',
-                bodyCssClass : 'panel-desc google-analytics-description'
-            },
-            {
-                html         : '<div class="google-analytics-getstarted"><h2>' + _('googleanalytics.getstarted_title') + '</h2><p>' + _('googleanalytics.getstarted_desc') + '</p></div>',
-                cls          : 'x-panel main-wrapper x-panel-noborder'
+            layout      : 'form',
+            items       : [{
+                html         : '<p>' + _('googleanalytics.stats_desc') + '</p>',
+                bodyCssClass : 'panel-desc'
+            }, {
+                html         : '<p>' + _('googleanalytics.no_oauth_content') + '</p>',
+                cls          : 'main-wrapper'
             }]
         }]
     });
 
-	GoogleAnalytics.panel.Access.superclass.constructor.call(this, config);
+    GoogleAnalytics.panel.Access.superclass.constructor.call(this, config);
 };
 
 Ext.extend(GoogleAnalytics.panel.Access, MODx.FormPanel);

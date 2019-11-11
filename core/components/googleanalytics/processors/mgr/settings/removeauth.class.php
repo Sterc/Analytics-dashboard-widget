@@ -6,7 +6,7 @@
  * Copyright 2019 by Oene Tjeerd de Bruin <oenetjeerd@sterc.nl>
  */
 
-class GoogleAnalyticsSettingsSaveProcessor extends modObjectProcessor
+class GoogleAnalyticsSettingsRemoveAuthProcessor extends modObjectProcessor
 {
     /**
      * @access public.
@@ -27,40 +27,20 @@ class GoogleAnalyticsSettingsSaveProcessor extends modObjectProcessor
 
     /**
      * @access public.
-     * @return Mixed.
+     * @return Array.
      */
     public function process()
     {
-        foreach (['history', 'cache_lifetime', 'panels'] as $key) {
+        foreach (['account', 'refresh_token'] as $key) {
             $setting = $this->modx->getObject('modSystemSetting', [
                 'key' => 'googleanalytics.' . $key
             ]);
 
             if ($setting) {
-                $value = $this->getProperty($key);
-
-                if (is_array($value)) {
-                    $setting->set('value', implode(',', $value));
-                } else {
-                    $setting->set('value', $value);
-                }
+                $setting->set('value', '');
 
                 $setting->save();
             }
-        }
-
-        $setting = $this->modx->getObject('modSystemSetting', [
-            'key' => 'googleanalytics.account'
-        ]);
-
-        if ($setting) {
-            $setting->set('value', json_encode([
-                'account'   => $this->getProperty('account'),
-                'property'  => $this->getProperty('property'),
-                'profile'   => $this->getProperty('profile')
-            ]));
-
-            $setting->save();
         }
 
         $this->modx->getCacheManager()->delete('googleanalytics');
@@ -73,4 +53,4 @@ class GoogleAnalyticsSettingsSaveProcessor extends modObjectProcessor
     }
 }
 
-return 'GoogleAnalyticsSettingsSaveProcessor';
+return 'GoogleAnalyticsSettingsRemoveAuthProcessor';

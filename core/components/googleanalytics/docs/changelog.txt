@@ -3,6 +3,17 @@ Google Analytics
 ----------------------
 
 ----------------------
+Version: 2.0.2-pl
+Released: 2019-11-07
+----------------------
+- Github issue #30
+- Github issue #26
+- Github issue #20
+- Github issue #32
+- Some bugfixes and better caching
+- Site speed added
+
+----------------------
 Version: 2.0.1-pl
 Released: 2018-12-14
 ----------------------
@@ -28,7 +39,7 @@ Released: 2015-09-17
 - New Google Auth
 - New Real Time Visitors function
 - Complete rebuild
-	- New ExtJS and PHP code
+    - New ExtJS and PHP code
 
 ----------------------
 Version: 1.0.1-pl

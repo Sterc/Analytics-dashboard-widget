@@ -1,46 +1,39 @@
 <?php
+
 /**
- * Google Analytics setup options resolver
+ * Google Analytics
  *
- * @package Google Analytics
- * @subpackage build
+ * Copyright 2019 by Oene Tjeerd de Bruin <oenetjeerd@sterc.nl>
  */
-$package = str_replace(' ', '', 'Google Analytics');
+
+$package = 'GoogleAnalytics';
+
+$settings = ['user_name', 'user_email'];
 
 $success = false;
+
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
     case xPDOTransport::ACTION_UPGRADE:
-        $settings = array(
-            'user_name',
-            'user_email',
-        );
         foreach ($settings as $key) {
             if (isset($options[$key])) {
-                $settingObject = $object->xpdo->getObject(
-                    'modSystemSetting',
-                    array('key' => strtolower($package) . '.' . $key)
-                );
+                $setting = $modx->getObject('modSystemSetting', [
+                    'key' => strtolower($package) . '.' . $key
+                ]);
 
-                if ($settingObject) {
-                    $settingObject->set('value', $options[$key]);
-                    $settingObject->save();
-                } else {
-                    $error = '[' . $package . '] ' . strtolower($package) . '.' . $key . ' setting could not be found,';
-                    $error .= ' so the setting could not be changed.';
-
-                    $object->xpdo->log(
-                        xPDO::LOG_LEVEL_ERROR,
-                        $error
-                    );
+                if ($setting) {
+                    $setting->set('value', $options[$key]);
+                    $setting->save();
                 }
             }
         }
 
         $success = true;
+
         break;
     case xPDOTransport::ACTION_UNINSTALL:
         $success = true;
+
         break;
 }
 

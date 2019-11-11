@@ -1,6 +1,9 @@
+# MODX Google Analytics
+![Google Analytics version](https://img.shields.io/badge/version-2.0.2-blue.svg) ![MODX Extra by Sterc](https://img.shields.io/badge/checked%20by-sterc-pink.svg) ![MODX version requirements](https://img.shields.io/badge/modx%20version%20requirement-2.4%2B-brightgreen.svg)
+
 Google Analytics Dashboard for MODX
 ==========================
-Current version: 2.0.1-pl
+Current version: 2.0.2-pl
 
 Author: Sterc <modx@sterc.nl>
 

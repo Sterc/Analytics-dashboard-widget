@@ -1,5 +1,7 @@
 Ext.onReady(function() {
-    MODx.load({xtype: 'googleanalytics-widget-visitors'});
+    MODx.load({
+        xtype : 'googleanalytics-widget-visitors'
+    });
 });
 
 GoogleAnalytics.panel.WidgetVisitors = function(config) {
@@ -10,12 +12,12 @@ GoogleAnalytics.panel.WidgetVisitors = function(config) {
         items       : [{
             xtype       : 'googleanalytics-line-chart',
             height      : 200,
-            pieConfig   : {
+            chart       : {
                 params      : {
                     data    : 'visits'
                 },
-                fields      : ['date', 'date_short', 'date_long', 'visits', 'pageviews'],
-                nameField   : 'date_long',
+                fields      : ['date', 'date_formatted', 'visits', 'pageviews'],
+                nameField   : 'date_formatted',
                 dateField   : 'date',
                 series      : [{
                     name        : _('googleanalytics.visitors'),
@@ -26,11 +28,11 @@ GoogleAnalytics.panel.WidgetVisitors = function(config) {
                 }]
             }
         }],
-        buttons : [{
-            text   : _('googleanalytics.view_more'),
-            cls    : 'primary-button',
-            handler: function () {
-                MODx.loadPage(MODx.action['googleanalytics:index'], 'namespace=googleanalytics');
+        buttons     : [{
+            text        : _('googleanalytics.view_more'),
+            cls         : 'primary-button',
+            handler     : function () {
+                MODx.loadPage('home', 'namespace=googleanalytics');
             }
         }]
     });

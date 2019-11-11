@@ -1,90 +1,84 @@
 {
     "name": "Google Analytics",
     "lowCaseName": "googleanalytics",
-    "description": "",
-    "author": "Oene Tjeerd de Bruin (Sterc)",
-    "version": "2.0.1",
+    "description": "A Google Analytics solution for MODX Revolution.",
+    "author": "Sterc",
+    "version": "2.0.2-pl",
     "package":{
-      "actions": [{
-        "id": 1,
-        "controller": "index",
-        "hasLayout": 1,
-        "langTopics": "googleanalytics:default",
-        "assets": ""
+        "menus": [{
+            "text": "googleanalytics",
+            "description": "googleanalytics.desc",
+            "parent": "components",
+            "action": "home",
+            "permissions": "googleanalytics"
         }],
-      "menus": [{
-        "text": "googleanalytics",
-        "description": "googleanalytics.menu_desc",
-        "action": 1,
-        "parent": "components",
-        "icon": "",
-        "menuIndex": 0,
-        "params": "",
-        "handler": ""
-      }],
-      "systemSettings": [{
-        "key": "branding_url",
-        "type": "textfield",
-        "area": "Google Analytics",
-        "value": "http://www.sterc.com"
-      }, {
-        "key": "branding_url_help",
-        "type": "textfield",
-        "area": "Google Analytics",
-        "value": "//www.sterc.com/extras/googleanalytics"
-      }, {
-        "key": "account",
-        "type": "textfield",
-        "area": "Google Analytics",
-        "value": ""
-      }, {
-        "key": "api_useragent",
-        "type": "textfield",
-        "area": "Google Analytics",
-        "value": "GoogleAnalyticsOAuth v2.0.0"
-      }, {
-        "key": "client_id",
-        "type": "textfield",
-        "area": "Google Analytics",
-        "value": ""
-      }, {
-        "key": "client_secret",
-        "type": "textfield",
-        "area": "Google Analytics",
-        "value": ""
-      }, {
-        "key": "history",
-        "type": "textfield",
-        "area": "Google Analytics",
-        "value": "14"
-      }, {
-        "key": "panels",
-        "type": "textfield",
-        "area": "Google Analytics",
-        "value": "summary,visitors,sources,content,content_search,goals"
-      }, {
-        "key": "refresh_token",
-        "type": "textfield",
-        "area": "Google Analytics",
-        "value": ""
-      }, {
-        "key": "user_name",
-        "type": "textfield",
-        "area": "Sterc Extra",
-        "value": ""
-      }, {
-        "key": "user_email",
-        "type": "textfield",
-        "area": "Sterc Extra",
-        "value": ""
-      }]
-    }
-    ,"build":{
+        "elements": {
+            "widgets": [{
+                "name": "googleanalytics.widget_visitors",
+                "description": "googleanalytics.widget_visitors_desc",
+                "type": "file",
+                "content": "visitors.widget.php",
+                "size": "half"
+            },{
+                "name": "googleanalytics.widget_realtime",
+                "description": "googleanalytics.widget_realtime_desc",
+                "type": "file",
+                "content": "realtime.widget.php",
+                "size": "half"
+            }]
+        },
+        "systemSettings": [{
+            "key": "branding_url",
+            "value": "//www.sterc.com",
+            "area": "googleanalytics"
+        },{
+            "key": "branding_url_help",
+            "value": "//www.sterc.com/extras/googleanalytics",
+            "area": "googleanalytics"
+        },{
+            "key": "account",
+            "type": "textfield",
+            "area": "Google Analytics",
+            "value": ""
+        },{
+            "key": "client_id",
+            "type": "textfield",
+            "area": "googleanalytics"
+        },{
+            "key": "client_secret",
+            "type": "textfield",
+            "area": "googleanalytics"
+        },{
+            "key": "history",
+            "type": "textfield",
+            "area": "googleanalytics",
+            "value": "14"
+        },{
+            "key": "panels",
+            "type": "textfield",
+            "area": "googleanalytics",
+            "value": "summary,visitors,sources,content,content_search,goals"
+        },{
+            "key": "refresh_token",
+            "type": "textfield",
+            "area": "googleanalytics"
+        },{
+            "key": "cache_lifetime",
+            "type": "textfield",
+            "area": "googleanalytics",
+            "value": "1800"
+        }]
+    },
+    "build":{
+        "readme": "docs/readme.txt",
+        "license": "docs/license.txt",
+        "changelog": "docs/changelog.txt",
         "resolver": {
             "after": [
-              "setupoptions.resolver.php",
-              "widget.resolver.php",
-              "stercextra.resolver.php"
+                "permissions.resolver.php",
+                "widgets.resolver.php",
+                "setupoptions.resolver.php",
+                "stercextra.resolver.php"
             ]
         },
         "setupOptions":{
