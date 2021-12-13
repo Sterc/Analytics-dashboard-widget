@@ -1,5 +1,7 @@
 <?php
 
+use MODX\Revolution\modDashboardFileWidget;
+
 /**
  * Google Analytics
  *

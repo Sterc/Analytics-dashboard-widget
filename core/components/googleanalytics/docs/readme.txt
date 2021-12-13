@@ -1,7 +1,7 @@
 ----------------------
 Google Analytics
 ----------------------
-Version: 2.0.2-pl
+Version: 3.0.0-beta
 Author: Oene Tjeerd de Bruin (Sterc)
 Contact: modx@sterc.nl - https://www.sterc.com
 ----------------------
