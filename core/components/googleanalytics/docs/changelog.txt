@@ -3,6 +3,12 @@ Google Analytics
 ----------------------
 
 ----------------------
+Version: 3.0.1-beta
+Released: 2022-06-02
+----------------------
+- Fixed PHP warning: Optional parameter declared before required parameter
+
+----------------------
 Version: 3.0.0-beta
 Released: 2021-12-13
 ----------------------

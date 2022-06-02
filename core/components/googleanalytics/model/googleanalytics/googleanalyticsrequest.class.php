@@ -360,7 +360,7 @@ class GoogleAnalyticsRequest
      * @param String $type.
      * @return Array.
      */
-    public function parseData(array $data = [], $type)
+    public function parseData(array $data, $type)
     {
         $output = [];
         $totals = [];

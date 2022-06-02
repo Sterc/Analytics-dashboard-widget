@@ -3,7 +3,7 @@
     "lowCaseName": "googleanalytics",
     "description": "A Google Analytics solution for MODX Revolution.",
     "author": "Sterc",
-    "version": "3.0.0-beta",
+    "version": "3.0.1-beta",
     "package":{
         "menus": [{
             "text": "googleanalytics",
