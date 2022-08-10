@@ -39,7 +39,7 @@ Ext.extend(GoogleAnalytics.panel.WidgetRealTime, MODx.FormPanel, {
         MODx.Ajax.request({
             url         : GoogleAnalytics.config.connector_url,
             params      : {
-                action      : 'mgr/getdata',
+                action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Get',
                 profile     : GoogleAnalytics.config.authorized_profile.id,
                 data        : 'realtime'
             },

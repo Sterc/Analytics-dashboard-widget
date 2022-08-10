@@ -1,0 +1,13 @@
+{
+    "name": "sterc/googleanalytics",
+    "description": "A Google Analytics solution for MODX Revolution.",
+    "keywords": [
+      "modx",
+      "Google Analytics"
+    ],
+    "autoload": {
+      "psr-4": {
+        "Sterc\\GoogleAnalytics\\": "src/"
+      }
+    }
+  }

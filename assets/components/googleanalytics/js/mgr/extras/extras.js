@@ -33,7 +33,7 @@ GoogleAnalytics.combo.Accounts = function(config) {
     Ext.applyIf(config, {
         url         : GoogleAnalytics.config.connector_url,
         baseParams  : {
-            action      : 'mgr/data/getaccounts'
+            action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Accounts\\Get'
         },
         fields      : ['id', 'name'],
         hiddenName  : 'account',
@@ -56,7 +56,7 @@ GoogleAnalytics.combo.Properties = function(config) {
     Ext.applyIf(config, {
         url             : GoogleAnalytics.config.connector_url,
         baseParams      : Ext.apply({
-            action          : 'mgr/data/getproperties',
+            action          : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Properties\\Get',
             account         : '',
         }, config.params || {}),
         fields          : ['id', 'name'],
@@ -80,7 +80,7 @@ GoogleAnalytics.combo.Profiles = function(config) {
     Ext.applyIf(config, {
         url             : GoogleAnalytics.config.connector_url,
         baseParams      : Ext.apply({
-            action          : 'mgr/data/getprofiles',
+            action          : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Profiles\\Get',
             account         : '',
             property        : ''
         }, config.params || {}),

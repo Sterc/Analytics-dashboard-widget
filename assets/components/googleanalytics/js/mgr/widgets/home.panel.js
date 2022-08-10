@@ -93,7 +93,7 @@ Ext.extend(GoogleAnalytics.panel.Home, MODx.FormPanel, {
         MODx.Ajax.request({
             url         : GoogleAnalytics.config.connector_url,
             params      : {
-                action      : 'mgr/getdata',
+                action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Get',
                 profile     : GoogleAnalytics.config.authorized_profile.id,
                 data        : 'realtime'
             },
@@ -341,8 +341,8 @@ Ext.extend(GoogleAnalytics.panel.Goals, MODx.Panel);
 Ext.reg('googleanalytics-panel-goals', GoogleAnalytics.panel.Goals);
 
 GoogleAnalytics.panel.Meta = function(config) {
-    config = config || {};   
-     
+    config = config || {};
+
     this.tpl = new Ext.XTemplate('<tpl>' +
         '<div class="google-analytics-metas">' +
             '<tpl if="results.length">' +
@@ -384,11 +384,11 @@ GoogleAnalytics.panel.Meta = function(config) {
             return Ext.util.Format.number(d, '0');
         }
     });
-    
+
     MODx.Ajax.request({
         url         : GoogleAnalytics.config.connector_url,
         params      : {
-            action      : 'mgr/getdata',
+            action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Get',
             profile     : GoogleAnalytics.config.authorized_profile.id,
             data        : 'meta-summary'
         },
@@ -406,7 +406,7 @@ GoogleAnalytics.panel.Meta = function(config) {
 };
 
 Ext.extend(GoogleAnalytics.panel.Meta, Ext.Panel, {
-    setData: function(data) {      
+    setData: function(data) {
         this.tpl.overwrite(this.body, data);
     }
 });
@@ -450,7 +450,7 @@ GoogleAnalytics.panel.Speed = function(config) {
     MODx.Ajax.request({
         url         : GoogleAnalytics.config.connector_url,
         params      : {
-            action      : 'mgr/getdata',
+            action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Get',
             profile     : GoogleAnalytics.config.authorized_profile.id,
             data        : 'speed'
         },

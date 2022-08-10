@@ -123,7 +123,7 @@ Ext.extend(GoogleAnalytics.page.Home, MODx.Component, {
             text        : _('googleanalytics.refresh_settings_confirm'),
             url         : GoogleAnalytics.config.connector_url,
             params      : {
-                action      : 'mgr/settings/refresh'
+                action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Settings\\Refresh'
             },
             listeners   : {
                 'success'   : {
@@ -168,7 +168,7 @@ GoogleAnalytics.window.UpdateAuth = function(config) {
         title       : _('googleanalytics.auth_create'),
         url         : GoogleAnalytics.config.connector_url,
         baseParams  : {
-            action      : 'mgr/settings/createauth'
+            action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Settings\\CreateAuth'
         },
         fields      : [{
             html        : '<p>' + _('googleanalytics.auth_create_desc') + '</p>',
@@ -214,7 +214,7 @@ GoogleAnalytics.window.UpdateSettings = function(config) {
         title       : _('googleanalytics.settings'),
         url         : GoogleAnalytics.config.connector_url,
         baseParams  : {
-            action      : 'mgr/settings/save'
+            action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Settings\\Save',
         },
         fields      : [{
             layout      : 'column',
@@ -361,7 +361,7 @@ GoogleAnalytics.window.UpdateSettings = function(config) {
             scope       : this
         }]
     });
-    
+
     GoogleAnalytics.window.UpdateSettings.superclass.constructor.call(this, config);
 };
 
@@ -399,7 +399,7 @@ Ext.extend(GoogleAnalytics.window.UpdateSettings, MODx.Window, {
             text        : _('googleanalytics.auth_remove_confirm'),
             url         : GoogleAnalytics.config.connector_url,
                 params      : {
-                action      : 'mgr/settings/removeauth'
+                action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Settings\\RemoveAuth'
             },
             listeners   : {
                 'success'   : {

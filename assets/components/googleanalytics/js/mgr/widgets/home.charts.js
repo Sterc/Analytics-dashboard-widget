@@ -17,7 +17,7 @@ Ext.extend(GoogleAnalytics.panel.PieChart, MODx.Panel, {
         MODx.Ajax.request({
             url         : GoogleAnalytics.config.connector_url,
             params      : Ext.apply(params, {
-                action      : 'mgr/getdata',
+                action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Get',
                 profile     : GoogleAnalytics.config.authorized_profile.id
             }),
             listeners   : {
@@ -133,7 +133,7 @@ Ext.extend(GoogleAnalytics.panel.LineChart, MODx.Panel, {
         MODx.Ajax.request({
             url         : GoogleAnalytics.config.connector_url,
             params      : Ext.apply(params, {
-                action      : 'mgr/getdata',
+                action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Get',
                 profile     : GoogleAnalytics.config.authorized_profile.id
             }),
             listeners   : {

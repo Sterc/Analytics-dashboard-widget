@@ -1,0 +1,62 @@
+name: Google Analytics
+lowCaseName: googleanalytics
+description: A Google Analytics solution for MODX Revolution.
+author: Sterc
+namespace: Sterc\FormIt
+version: 3.0.2
+
+menus:
+  - text: googleanalytics
+    description: googleanalytics.desc
+    action: home
+    parent: components
+    permissions: googleanalytics
+
+systemSettings:
+  - key: branding_url
+    value: //www.sterc.com
+    area: googleanalytics
+  - key: branding_url_help
+    value: //www.sterc.com/extras/googleanalytics
+    area: googleanalytics
+  - key: account
+    type: textfield
+    area: Google Analytics
+    value:
+  - key: client_id
+    type: textfield
+    area: googleanalytics
+  - key: client_secret
+    type: textfield
+    area: googleanalytics
+  - key: history
+    type: textfield
+    area: googleanalytics
+    value: "14"
+  - key: panels
+    type: textfield
+    area: googleanalytics
+    value: summary,visitors,sources,content,content_search,goals
+  - key: refresh_token
+    type: textfield
+    area: googleanalytics
+  - key: cache_lifetime
+    type: textfield
+    area: googleanalytics
+    value: "1800"
+
+widgets:
+  - name: googleanalytics.widget_visitors
+    description: googleanalytics.widget_visitors_desc
+    type: file
+    content: "../../src/Widgets/Visitors.php"
+    size: half
+  - name: googleanalytics.widget_realtime
+    description: googleanalytics.widget_realtime_desc
+    type: file
+    content: "../../src/Widgets/RealTime.php"
+    size: half
+
+build:
+  setupOptions: "setup.options.php"
+  scriptsAfter: ["permissions.resolver.php", "setupoptions.resolver.php", "stercextra.resolver.php", "widgets.resolver.php"]

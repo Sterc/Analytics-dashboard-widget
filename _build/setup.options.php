@@ -1,10 +1,6 @@
 <?php
-
-/**
- * Google Analytics
- *
- * Copyright 2019 by Oene Tjeerd de Bruin <oenetjeerd@sterc.nl>
- */
+use xPDO\Transport\xPDOTransport;
+use MODX\Revolution\modSystemSetting;
 
 $package = 'GoogleAnalytics';
 
@@ -22,10 +18,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
     case xPDOTransport::ACTION_UPGRADE:
         foreach ($settings as $key => $value) {
-            $setting = $modx->getObject('modSystemSetting', [
-                'key' => strtolower($package) . '.' . $value['key']
-            ]);
-
+            $setting = $modx->getObject(modSystemSetting::class, ['key' => strtolower($package) . '.' . $value['key']]);
             if ($setting) {
                 $settings[$key]['value'] = $setting->get('value');
             }

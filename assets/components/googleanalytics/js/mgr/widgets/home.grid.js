@@ -53,7 +53,7 @@ GoogleAnalytics.grid.Visitors = function(config) {
         cm          : columns,
         url         : GoogleAnalytics.config.connector_url,
         baseParams  : {
-            action      : 'mgr/getdata',
+            action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Get',
             profile     : GoogleAnalytics.config.authorized_profile.id,
             data        : 'visits'
         },
@@ -130,7 +130,7 @@ GoogleAnalytics.grid.Sources = function(config) {
         cm          : columns,
         url         : GoogleAnalytics.config.connector_url,
         baseParams  : {
-            action      : 'mgr/getdata',
+            action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Get',
             profile     : GoogleAnalytics.config.authorized_profile.id,
             data        : 'sources'
         },
@@ -205,7 +205,7 @@ GoogleAnalytics.grid.ContentHigh = function(config) {
         cm          : columns,
         url         : GoogleAnalytics.config.connector_url,
         baseParams  : {
-            action      : 'mgr/getdata',
+            action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Get',
             profile     : GoogleAnalytics.config.authorized_profile.id,
             data        : 'content-high'
         },
@@ -273,7 +273,7 @@ GoogleAnalytics.grid.ContentLow = function(config) {
         cm          : columns,
         url         : GoogleAnalytics.config.connector_url,
         baseParams  : {
-            action      : 'mgr/getdata',
+            action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Get',
             profile     : GoogleAnalytics.config.authorized_profile.id,
             data        : 'content-low'
         },
@@ -353,7 +353,7 @@ GoogleAnalytics.grid.ContentSearch = function(config) {
         cm          : columns,
         url         : GoogleAnalytics.config.connector_url,
         baseParams  : {
-            action      : 'mgr/getdata',
+            action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Get',
             profile     : GoogleAnalytics.config.authorized_profile.id,
             data        : 'content-search'
         },
@@ -411,7 +411,7 @@ GoogleAnalytics.grid.Goals = function(config) {
         cm          : columns,
         url         : GoogleAnalytics.config.connector_url,
         baseParams  : {
-            action      : 'mgr/getdata',
+            action      : '\\Sterc\\GoogleAnalytics\\Processors\\Mgr\\Data\\Get',
             profile     : GoogleAnalytics.config.authorized_profile.id,
             data        : 'goals'
         },
